@@ -4,8 +4,8 @@
 <template>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <router-link :to="{ name: 'home' }">
-                <img src="/src/assets/boolbnb_logo.jpeg" alt="Logo" class="d-inline-block align-text-top">
+            <router-link class="w-50" :to="{ name: 'home' }">
+                <img src="/src/assets/boolbnb_logo.jpeg" alt="Logo" class="align-text-top">
             </router-link>
 
 
@@ -15,19 +15,17 @@
             </button>
 
 
-            <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <router-link :to="{ name: 'search' }" class="nav-link">
+                            Ricerca Avanzata
+                        </router-link>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                        <router-link :to="{ name: 'login' }" class="nav-link">
+                            Login
+                        </router-link>
                     </li>
                 </ul>
             </div>
@@ -36,9 +34,25 @@
 </template>
 
 <style scoped lang="scss">
-.container-fluid {
-    img {
-        width: 20%;
+    @use "../style/partials/palette" as *;
+
+    .container-fluid {
+        img {
+            width: 30%;
+        }
+        li {
+            text-decoration: none;
+        }
+
+        .router-link-active {
+            color: $orange;
+            
+        }
+    };
+
+    @media screen and (min-width: 1024px) {
+    .container-fluid {
+        max-height: 80px;
+        }
     }
-}
 </style>
