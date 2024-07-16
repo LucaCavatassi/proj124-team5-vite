@@ -5,8 +5,13 @@
 </script>
 
 <template>
-    <h1>Results</h1>
+    <div class="container">
+        <h1>Results</h1>
+    </div>
 </template>
 
-<style>
+<style scoped lang="scss">
+    .container {
+        padding-top: 80px;
+    }
 </style>
