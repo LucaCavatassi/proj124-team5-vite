@@ -53,7 +53,7 @@
     };
 
     @media screen and (min-width: 1024px) {
-    .container-fluid {
+    nav {
         max-height: 80px;
         }
     }

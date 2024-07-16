@@ -1,8 +1,17 @@
 <script>
+  import axios from 'axios';
   export default {
     data () {
       return {
-        location: "",
+        inputLocation: "ciao",
+      }
+    },
+
+    methods: {
+      sendData() {
+        axios.post("http://127.0.0.1:8000/api/apartments/search", ((resp)=> {
+          console.log(resp);
+        }))
       }
     }
   }
@@ -10,8 +19,8 @@
 
 <template>
     <form class="form-inline my-2 my-lg-0 d-flex">
-      <input v-model="location" class="form-control mr-sm-2" type="search" placeholder="Inserisci la tua destinazione" aria-label="Search">
-      <router-link :to="{name: 'results'}" class="btn btn-outline-success my-2 my-sm-0" type="submit">Cerca</router-link>
+      <input v-model="inputLocation" class="form-control mr-sm-2" type="search" placeholder="Inserisci la tua destinazione" aria-label="Search" required>
+      <router-link :to="{ name: 'results', params: {location: inputLocation} }" id="search-btn" class="btn btn-outline-success my-2 my-sm-0" type="submit">Cerca</router-link>
     </form>
 </template>
 

@@ -1,17 +1,35 @@
 <script>
+    import axios from 'axios';
     export default {
-            name: "ResultsPage"
-        }
+    name: "ResultsPage",
+    data() {
+        return {
+            searchResults: [],
+        };
+    },
+    created() {   
+            axios.get("http://127.0.0.1:8000/api/apartments/search").then((resp)=> {
+                this.searchResults = resp.data.results;
+                console.log(this.searchResults);
+                return this.searchResults;
+            });
+    }
+}
+
+        
 </script>
 
 <template>
     <div class="container">
-        <h1>Results</h1>
+        <div>
+            <h1>Risultati</h1>
+            <ul>
+                <li v-for="result in searchResults">{{ result.title }}</li>
+            </ul>
+        </div>
     </div>
 </template>
 
 <style scoped lang="scss">
-    .container {
-        padding-top: 80px;
-    }
+    
 </style>

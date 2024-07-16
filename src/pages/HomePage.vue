@@ -7,8 +7,6 @@
     export default {
         name: "HomePage",
         components:{VueWriter, SearchBar, CarouselJumbo }
-        
-            
     }
 
 
