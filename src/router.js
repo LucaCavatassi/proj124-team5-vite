@@ -25,7 +25,7 @@ const router = createRouter({
             component: SearchPage 
         },
         {
-            path: "/results/:location",
+            path: "/results",
             name: "results",
             component: ResultsPage 
         },
