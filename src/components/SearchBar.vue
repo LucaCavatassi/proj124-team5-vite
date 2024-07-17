@@ -1,10 +1,20 @@
 <script>
+  import axios from 'axios';
+  import { store } from "/src/store.js";
+
+  export default {
+    data () {
+      return {
+        store,
+      }
+    },
+  }
 </script>
 
 <template>
     <form class="form-inline my-2 my-lg-0 d-flex">
-      <input class="form-control mr-sm-2" type="search" placeholder="Inserisci la tua destinazione" aria-label="Search">
-      <router-link :to="{name: 'results'}" class="btn btn-outline-success my-2 my-sm-0" type="submit">Cerca</router-link>
+      <input v-model="this.store.location" id="location" class="form-control mr-sm-2" type="search" placeholder="Inserisci la tua destinazione" aria-label="Search" required>
+      <router-link :to="{ name: 'results' }" id="search-btn" class="btn btn-outline-success my-2 my-sm-0" type="submit">Cerca</router-link>
     </form>
 </template>
 

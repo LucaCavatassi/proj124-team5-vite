@@ -16,4 +16,7 @@ export default {
 </template>
 
 <style>
+.container {
+        padding-top: 80px;
+    }
 </style>
