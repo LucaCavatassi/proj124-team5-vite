@@ -5,7 +5,7 @@
     <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
         <div class="container-fluid">
             <router-link class="w-50" :to="{ name: 'home' }">
-                <img src="/src/assets/boolbnb_logo.jpeg" alt="Logo" class="align-text-top">
+                <img src="/src/assets/boolbnb_logo.png" alt="Logo" class="align-text-top">
             </router-link>
 
 
