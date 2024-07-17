@@ -2,19 +2,22 @@
     import axios from 'axios';
     import { store } from "/src/store.js";
 
+
     export default {
     name: "ResultsPage",
     data() {
         return {
             store,
+            location: "",
             searchResults: [],
         };
     },
     created() {   
             axios.get("http://127.0.0.1:8000/api/apartments/search").then((resp)=> {
                 this.searchResults = resp.data.results;
-                console.log(this.searchResults);
-                console.log(localStorage.getItem('query_search'));
+                
+                console.log(this.store.location);
+
                 return this.searchResults;
             });
     }

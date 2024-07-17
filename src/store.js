@@ -1,7 +1,6 @@
 import { reactive } from "vue";
 
 export const store = reactive({
-    location: ""
+    location: "",
 });
 
-localStorage.setItem('query_search', this.location);
