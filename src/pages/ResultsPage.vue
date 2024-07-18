@@ -13,10 +13,10 @@
         };
     },
     created() {   
-            axios.get("http://127.0.0.1:8000/api/apartments/search").then((resp)=> {
+            axios.get("http://127.0.0.1:8000/api/search").then((resp)=> {
                 this.searchResults = resp.data.results;
                 
-                console.log(this.store.location);
+                console.log(this.searchResults);
 
                 return this.searchResults;
             });
