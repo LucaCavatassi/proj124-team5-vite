@@ -1,5 +1,4 @@
 <script>
-  import axios from 'axios';
   import { store } from "/src/store.js";
   
 
@@ -7,33 +6,26 @@
     data () {
       return {
         store,
-        location: "roma",
+        userInput: "",
       }
     },
 
     methods: {
       submitData() {
-        
-      axios.post('http://127.0.0.1:8000/api/search/user-input', {
-        data: {
-          input: "roma"
+        if (this.userInput.trim() !== '') {
+          this.$router.push({ path: '/results', query: { q: this.userInput } });
+        } else {
+          alert('Please enter a search term');
         }
-      })
-      .then(response => {
-        console.log('Data submitted successfully:', response.data);
-      })
-      .catch(error => {
-        console.error('There was an error submitting the data:', error);
-      });
-    }
-    }
+      },
+    },
   }
 </script>
 
 <template>
     <form method="POST" class="form-inline my-2 my-lg-0 d-flex">
-      <input v-model=this.store.location id="location" class="form-control mr-sm-2" type="search" placeholder="Inserisci la tua destinazione" aria-label="Search" required>
-      <router-link :to="{ name: 'results' }" ><button id="search-btn" class="btn btn-outline-success my-2 my-sm-0" @click="submitData" type="submit">Cerca</button></router-link>
+      <input v-model="userInput" id="location" class="form-control mr-sm-2" type="search" placeholder="Inserisci la tua destinazione" aria-label="Search" required>
+      <button id="search-btn" class="btn btn-outline-success my-2 my-sm-0" @click="submitData">Cerca</button>
     </form>
 </template>
 
