@@ -1,36 +1,50 @@
 <script>
-    import axios from 'axios';
-    import { store } from "/src/store.js";
+import axios from 'axios';
 
-
-    export default {
+export default {
+    props: ["query"],
     name: "ResultsPage",
+    watch: {
+        query: {
+            immediate: true,
+            handler(newQuery) {
+                this.fetchResults(newQuery);
+            }
+        }
+    },
     data() {
         return {
-            store,
             isLoading: false,
             searchResults: [],
+            error: null,
         };
     },
-    created() { 
-        if ( this.store.location === null ) {
-            isLoading = true;
-        }  else {
-            setTimeout(function() {
+    mounted() {
+        this.fetchResults();
+    },
+    methods: {
+        fetchResults(query) {
+            if (!query) return;
 
-                axios.get("http://127.0.0.1:8000/api/search").then((resp)=> {
-                    // this.searchResults = resp.data.results;
-                    
-                    console.log(resp);
+            this.loading = true;
+            this.error = null;
 
-                    // return this.searchResults;
+            axios.get('http://127.0.0.1:8000/api/search', {
+                params: { input: query },
+            })
+                .then(response => {
+                    this.searchResults = response.data;
+                    this.loading = false;
+                })
+                .catch(error => {
+                    this.error = 'There was an error fetching the data';
+                    this.loading = false;
                 });
-            },1000);
-        }
-    }
+        },
+    },
 }
 
-        
+
 </script>
 
 <template>
@@ -44,6 +58,4 @@
     </div>
 </template>
 
-<style scoped lang="scss">
-    
-</style>
+<style scoped lang="scss"></style>

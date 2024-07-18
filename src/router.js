@@ -26,8 +26,9 @@ const router = createRouter({
         },
         {
             path: "/results",
-            name: "results",
-            component: ResultsPage 
+            name: "SearchResults",
+            component: ResultsPage,
+            props: (route) => ({ query: route.query.q })
         },
         {
             path: "/results/:slug",
