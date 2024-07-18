@@ -32,14 +32,15 @@ export default {
             axios.get('http://127.0.0.1:8000/api/search', {
                 params: { input: query },
             })
-                .then(response => {
-                    this.searchResults = response.data;
-                    this.loading = false;
-                })
-                .catch(error => {
-                    this.error = 'There was an error fetching the data';
-                    this.loading = false;
-                });
+            .then(response => {
+                this.searchResults = response.data;
+                console.log(this.searchResults);
+                this.loading = false;
+            })
+            .catch(error => {
+                this.error = 'There was an error fetching the data';
+                this.loading = false;
+            });
         },
     },
 }
@@ -50,7 +51,7 @@ export default {
 <template>
     <div class="container">
         <div>
-            <h1>Risultati</h1>
+            <h1>Risultati vicino <span>{{ query }}</span></h1>
             <ul>
                 <li v-for="result in searchResults">{{ result.title }}</li>
             </ul>
