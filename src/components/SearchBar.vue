@@ -11,25 +11,36 @@
     },
 
     methods: {
-      sendString() {
-        try {
-          window.csrfToken = document.querySelector('meta[name="csrf-token"]').content;
-          axios.post("http://127.0.0.1:8000/api/apartments/send-location", {
-            _token: csrfToken,
-            myLocation : this.store.location,
-          },
-        ).then((resp)=> {console.log(resp);});
-        } catch (error) {
-          console.log(error);
-        }
-      }
+      submitData() {
+      axios.post('http://127.0.0.1:8000/api/search/user-input', {
+        input: this.store.location
+      })
+      .then(response => {
+        console.log('Data submitted successfully:', response.data);
+      })
+      .catch(error => {
+        console.error('There was an error submitting the data:', error);
+      });
+    }
+      // sendString() {
+      //   try {
+      //     window.csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+      //     axios.post("http://127.0.0.1:8000/api/apartments/send-location", {
+      //       _token: csrfToken,
+      //       myLocation : this.store.location,
+      //     },
+      //   ).then((resp)=> {console.log(resp);});
+      //   } catch (error) {
+      //     console.log(error);
+      //   }
+      // }
     }
   }
 </script>
 
 <template>
     <form method="POST" class="form-inline my-2 my-lg-0 d-flex">
-      <input v-model="this.store.location" id="location" class="form-control mr-sm-2" type="search" placeholder="Inserisci la tua destinazione" aria-label="Search" required>
+      <input v-model=this.store.location id="location" class="form-control mr-sm-2" type="search" placeholder="Inserisci la tua destinazione" aria-label="Search" required>
       <router-link :to="{ name: 'results' }" ><button id="search-btn" class="btn btn-outline-success my-2 my-sm-0" @click="sendString" type="submit">Cerca</button></router-link>
     </form>
 </template>
