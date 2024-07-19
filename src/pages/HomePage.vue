@@ -17,7 +17,7 @@
         <CarouselJumbo/>
         <div class="container d-flex flex-column justify-content-center py-2">
             <div class="row">
-                <h1> Voglio andare a <VueWriter style="color: #FE5D26;" class="d-inline" :eraseSpeed="50" :array="['Londra','Parigi','Roma','Berlino','Madrid','Milano']"/></h1> 
+                <h1 class="px-lg-5"> Voglio andare a <VueWriter style="color: #FE5D26;" class="d-inline" :eraseSpeed="50" :array="['Londra','Parigi','Roma','Berlino','Madrid','Milano']"/></h1> 
             </div>
             
             <div class="row">
