@@ -36,7 +36,8 @@ const router = createRouter({
         {
             path: "/results/:slug",
             name: "single-result",
-            component: SingleResultPage 
+            component: SingleResultPage,
+            props: true  
         }
     ]
 });
