@@ -36,10 +36,10 @@
         
         position: relative;
         z-index: 2;
-        h1{
+
+        h1 {
             font-weight: bold;
             color: $white;
         }
     }
-
 </style>

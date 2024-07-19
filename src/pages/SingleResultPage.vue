@@ -1,12 +1,30 @@
 <script>
-        export default {
-            name: "SingleResultPage"
-        }
+    import { store } from '../store';
+
+    export default {
+        name: "SingleResultPage",
+        created() {
+            console.log(this.store);
+        },
+        data() {
+            return {
+                store,
+                
+            }
+        },
+    }
 </script>
 
 <template>
-    <h1>SingleResult</h1>
+    <div class="container">
+        <div class="row">
+            <h1 class="fw-bold">{{ store.searchResults[0].title }}</h1>
+            <p class="fw-bold">{{ store.searchResults[0].title }}</p>
+
+        </div>
+    </div>
 </template>
 
-<style>
+<style scoped lang="scss">
+
 </style>
