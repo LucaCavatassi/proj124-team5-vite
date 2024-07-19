@@ -23,6 +23,7 @@ export default {
 
 <style lang="scss">
   @use "./style/general" as *;
+
   @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
   * {
     font-family: "Quicksand", Arial, Helvetica, sans-serif;
@@ -30,8 +31,6 @@ export default {
 
   .container-main {
     min-height: calc(100vh - $header-height);
-    .container {
-            padding-top: $header-height;
-        }
+    padding-top: $header-height;
   }
 </style>
