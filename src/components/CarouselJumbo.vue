@@ -28,7 +28,7 @@
     
     img {
         max-height: 100vh;
-        
+        min-width: 100vw;
     }
     .carousel {
         position: absolute;
@@ -47,11 +47,7 @@
     }
 
     @media screen and (min-width: 968px) {
-        img {
-            width: 100%;
-            object-fit: cover;
-            object-position: center;
-        }
+        
         .carousel {
             height: 100vh;
             width: 100%;

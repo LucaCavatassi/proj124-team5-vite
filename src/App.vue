@@ -25,7 +25,9 @@ export default {
     font-family: "Quicksand", Arial, Helvetica, sans-serif;
   }
 
-  .container {
-          padding-top: 80px;
-      }
+  router-view {
+    .container {
+            padding-top: 80px;
+        }
+  }
 </style>
