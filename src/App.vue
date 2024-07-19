@@ -2,9 +2,12 @@
 <script>
 import axios from "axios"
 import AppNavBar from "./components/AppNavbar.vue"
+import AppFooter from "./components/AppFooter.vue"
+
 export default {
   components: {
-    AppNavBar
+    AppNavBar,
+    AppFooter
   },
 }
 
@@ -12,11 +15,23 @@ export default {
 
 <template>
   <AppNavBar/>
-  <router-view></router-view>
+  <div class="container-main">
+    <router-view></router-view>
+  </div>
+  <AppFooter/>
 </template>
 
-<style>
-.container {
-        padding-top: 80px;
-    }
+<style lang="scss">
+  @use "./style/general" as *;
+  @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+  * {
+    font-family: "Quicksand", Arial, Helvetica, sans-serif;
+  }
+
+  .container-main {
+    min-height: calc(100vh - $header-height);
+    .container {
+            padding-top: $header-height;
+        }
+  }
 </style>

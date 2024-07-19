@@ -33,10 +33,14 @@
 
 <style scoped lang="scss">
     @use "../style/partials/palette" as *;
-    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+    
+    nav {
+        min-height: 60px;
+    }
+
 
     .container-fluid {
-        font-family: "Quicksand", Arial, Helvetica, sans-serif;
+        
         img {
             width: 30%;
         }
@@ -52,6 +56,7 @@
 
     @media screen and (min-width: 1024px) {
     nav {
+        min-height: 80px;
         max-height: 80px;
         }
     }
