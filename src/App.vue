@@ -15,19 +15,23 @@ export default {
 
 <template>
   <AppNavBar/>
-  <router-view></router-view>
+  <div class="container-main">
+    <router-view></router-view>
+  </div>
   <AppFooter/>
 </template>
 
-<style>
+<style lang="scss">
+  @use "./style/general" as *;
   @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
   * {
     font-family: "Quicksand", Arial, Helvetica, sans-serif;
   }
 
-  router-view {
+  .container-main {
+    min-height: calc(100vh - $header-height);
     .container {
-            padding-top: 80px;
+            padding-top: $header-height;
         }
   }
 </style>

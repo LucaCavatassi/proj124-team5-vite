@@ -3,7 +3,7 @@
 
 <template>
     <div class="container">
-        <footer class="fsSmall">
+        <footer class="fsSmall footer mt-auto">
             <div class="links d-flex justify-content-between border-bottom">
                 <ul class="nav justify-content-center">
                     <li class="nav-item"><a href="https://youtu.be/dQw4w9WgXcQ?si=EfCJJohZbHcWNRAC" class="nav-link px-2">Termini</a></li>
@@ -34,10 +34,9 @@
 
     .container {
         background-color: $green;
-        margin: 0;
         min-width: 100%;
         footer {
-            
+            padding: 5px;
             color: $white !important;
             p {
                 margin: 0;
