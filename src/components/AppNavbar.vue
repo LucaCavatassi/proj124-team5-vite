@@ -35,10 +35,10 @@
 
 <style scoped lang="scss">
     @use "../style/partials/palette" as *;
-    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+    
 
     .container-fluid {
-        font-family: "Quicksand", Arial, Helvetica, sans-serif;
+        
         img {
             width: 30%;
         }
