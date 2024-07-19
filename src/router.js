@@ -17,7 +17,10 @@ const router = createRouter({
         {
             path: "/login",
             name: "login",
-            component: LoginPage 
+            beforeEnter() {
+                // Redirect to the Laravel login page
+                window.location.href = "http://127.0.0.1:8000/";
+            }
         },
         {
             path: "/search",
