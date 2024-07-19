@@ -24,7 +24,10 @@
 </template>
 
 <style scoped lang="scss">
-    @use "../style/partials/palette" as *;
+    @use "../style/general" as *;
+    .container {
+        
+    }
     
     img {
         max-height: 100vh;

@@ -30,7 +30,7 @@ export default {
   }
 
   .container-main {
-    min-height: calc(100vh - $header-height);
-    padding-top: $header-height;
+    min-height: 100vh;
+    // padding-top: $header-height;
   }
 </style>

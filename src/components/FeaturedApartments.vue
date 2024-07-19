@@ -67,7 +67,7 @@ import axios from "axios";
         <div class="row">
             <div class="col-4 py-5" v-for="featured in this.allFeatured">
                 <div class="card">
-                    <img src="../assets/boolbnb_logo.jpg" class="card-img-top" alt="">
+                    <img src="https://www.apartments.com/blog/sites/default/files/styles/x_large_hq/public/image/2023-06/ParkLine-apartment-in-Miami-FL.jpg?itok=kQmw64UU" class="card-img-top" alt="">
                     <div class="card-body">
                         <h5 class="card-title">{{ featured.title }}</h5>
                         <p class="card-text">{{ featured.apartment_description }}</p>
