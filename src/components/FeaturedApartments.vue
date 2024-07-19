@@ -67,7 +67,7 @@ import axios from "axios";
         <div class="row">
             <div class="col-4 py-5" v-for="featured in this.allFeatured">
                 <div class="card">
-                    <img src="..." class="card-img-top" alt="">
+                    <img src="../assets/boolbnb_logo.jpg" class="card-img-top" alt="">
                     <div class="card-body">
                         <h5 class="card-title">{{ featured.title }}</h5>
                         <p class="card-text">{{ featured.apartment_description }}</p>
@@ -84,6 +84,7 @@ import axios from "axios";
 
     .card {
         border-color: $green;
+        height: 100%;
     }
     .ms_btn {
         background-color:  $orange;
