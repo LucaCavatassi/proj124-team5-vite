@@ -92,5 +92,6 @@ import axios from "axios";
     }
     .ms_btn:hover {
         background-color: #fb7a4f;
+        color: $white;
     }
 </style>
