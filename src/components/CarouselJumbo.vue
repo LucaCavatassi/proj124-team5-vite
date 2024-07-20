@@ -25,6 +25,7 @@
 
 <style scoped lang="scss">
     @use "../style/general" as *;
+
     
     img {
         max-height: 100vh;
