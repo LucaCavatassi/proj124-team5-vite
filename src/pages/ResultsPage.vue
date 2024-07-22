@@ -76,28 +76,34 @@
                 localStorage.setItem('filters', JSON.stringify(this.filters));
             },
 
-            loadFilters() {
-                const query = this.$route.query;
-                console.log(query.firstSearch);
+        loadFilters() {
+            const query = this.$route.query;
+            console.log(query.firstSearch);
+            const savedFilters = localStorage.getItem('filters');
 
-                // If initialSearch flag is present, do not load filters from local storage
-                if (query.firstSearch) {
-                    this.filters = {
-                        beds: null,
-                        bathroom: null,
-                        rooms: null,
-                    };
-                    this.tempFilters = { ...this.filters };
-                } else {
-                    // Otherwise, load from local storage
-                    const savedFilters = localStorage.getItem('filters');
-                    if (savedFilters) {
-                        this.filters = JSON.parse(savedFilters);
-                        this.tempFilters = { ...this.filters };
-                    }
-                }
+
+            // If initialSearch flag is present, do not load filters from local storage
+            if (query.firstSearch) {
+                this.filters = {
+                    beds: null,
+                    bathroom: null,
+                    rooms: null,
+                };
+                this.tempFilters = { ...this.filters };
+                localStorage.removeItem('filters');
+
+
+                // Remove initialSearch flag from the URL without reloading the page
+                this.$router.replace({ 
+                path: this.$route.path, 
+                query: { q: query.q }
+                });
+            } else if (savedFilters) {
+                this.filters = JSON.parse(savedFilters);
+                this.tempFilters = { ...this.filters };
             }
-        },
+        }
+    },
 
         computed: {
             filteredApartments() {
@@ -128,23 +134,23 @@
 
         <div v-else>
             <!-- FILTERS -->
-            <div class="row">
-                <div class="col-3">
-                    <label for="beds">Letti: </label>
+            <div class="row align-items-center py-3">
+                <div class="col-3 d-flex flex-column">
+                    <label for="beds">Letti</label>
                     <input id="beds" type="number" v-model="tempFilters.beds" />
                 </div>
 
-                <div class="col-3">
-                    <label for="bathroom">Bagni:</label>
+                <div class="col-3 d-flex flex-column">
+                    <label for="bathroom">Bagni</label>
                     <input id="bathroom" type="number" v-model="tempFilters.bathroom" />
                 </div>
 
-                <div class="col-3">
-                    <label for="rooms">Stanze: </label>
+                <div class="col-3 d-flex flex-column">
+                    <label for="rooms">Stanze</label>
                     <input id="rooms" type="number" v-model="tempFilters.rooms" />
                 </div>
-                <div class="col-3">
-                    <button @click="applyFilters">Apply Filters</button>
+                <div class="col-3 d-flex justify-content-end">
+                    <button @click="applyFilters">Applica Filtri</button>
                 </div>
             </div>
 
