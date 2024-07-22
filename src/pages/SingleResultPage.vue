@@ -43,15 +43,23 @@
                 <span class="visually-hidden">Loading...</span>
             </div>
         </div>
-        <p>Descrizione:{{ apartment.apartment_description }}</p>
-        <span>Bagni:{{ apartment.bathroom }}</span>
-        <span>Camere da letto:{{ apartment.beds }}</span>
-        <span>Dimensione:{{ apartment.square_mt }}</span>
-        <ul>
-            <li v-for="(service, index) in apartment.services">
-                {{service.title}}
-            </li>
-        </ul>
+        <h5>Descrizione: {{ apartment.apartment_description }}</h5>
+        <div class="row mt-3">
+            <div class="col-6">
+                <h5>Caratteristiche</h5>
+                <p>Bagni: {{ apartment.bathroom }}</p>
+                <p>Camere da letto: {{ apartment.beds }}</p>
+                <p>Dimensione: {{ apartment.square_mt }}</p>
+            </div>
+            <div class="col-6">
+                <h5>Servizi</h5>
+                <ul>
+                    <li v-for="(service, index) in apartment.services">
+                        {{service.title}}
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 </template>
 
