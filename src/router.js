@@ -34,10 +34,10 @@ const router = createRouter({
             props: (route) => ({ query: route.query.q })
         },
         {
-            path: "/results/:slug",
-            name: "single-result",
+            path: '/single-result/:slug',
+            name: 'single-result',
             component: SingleResultPage,
-            props: true  
+            props: true 
         }
     ]
 });
