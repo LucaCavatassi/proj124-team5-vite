@@ -1,110 +1,146 @@
 <script>
-    import axios from 'axios';
-    import { store } from '../store';
-    import ApartmentCard from '../components/ApartmentCard.vue'
+import axios from 'axios';
+import { store } from '../store';
+import ApartmentCard from '../components/ApartmentCard.vue'
 
-    export default {
-        props: ["query"],
-        name: "ResultsPage",
-        watch: {
-            query: {
-                immediate: true,
-                handler(newQuery) {
-                    this.fetchResults(newQuery);
-                }
-            }
-        },
-        data() {
-            return {
-                isLoading: false,
-                searchResults: [],
-                error: null,
-                store
-            };
-        },
-        components: {
-            ApartmentCard
-        },
-        mounted() {
-            this.fetchResults();
-        },
-
-        methods: {
-            fetchData() {
-            axios.get('http://127.0.0.1:8000/api/filter',{
-                params: {
-                    beds: 5,
-                    rooms: 3,
-                    bathroom: 2,
-                    square_mt: 75
-                } 
-            })
-                .then(response => {
-                    console.log(response.data);
-                    // Gestisci i dati qui
-                    this.searchResults = response.data;
-                })
-                .catch(error => {
-                    console.error('Errore nella chiamata:', error);
-                });
-        },
-            fetchResults(query) {
-                if (!query) return;
-
-                this.isLoading = true;
-                this.error = null;
-
-                // First Axios call
-                axios.get('http://127.0.0.1:8000/api/search', {
-                    params: { input: query },
-                })
-                    .then(response => {
-                        this.store.searchResults = response.data;
-                        console.log("Search Results:", this.store.searchResults);
-                        this.isLoading = false;
-                    })
-                    .catch(error => {
-                        this.error = 'There was an error fetching the search results';
-                        console.error("Error fetching search results:", error);
-                        this.isLoading = false;
-                    });
-
-                axios.get(`http://127.0.0.1:8000/api/apartment/${this.store.searchResults.slug}/address`)
-                    .then(response => {
-                        this.store.address = response.data;
-                        console.log("Address:", this.store.address);
-                    })
-                    .catch(error => {
-                        console.error("Error fetching address:", error);
-                    });
-
+export default {
+    props: ["query"],
+    name: "ResultsPage",
+    watch: {
+        query: {
+            immediate: true,
+            handler(newQuery) {
+                this.fetchResults(newQuery);
             }
         }
-    };
+    },
+    data() {
+        return {
+            searchResults: [],
+            isLoading: false,
+            error: null,
+            store,
+
+            filters: {
+                beds: null,
+                bathroom: null,
+                rooms: null,
+            },
+
+            tempFilters: {
+                beds: null,
+                bathroom: null,
+                rooms: null,
+            }
+        };
+    },
+
+    components: {
+        ApartmentCard
+    },
+
+    created() {
+        this.fetchResults();
+    },
+
+    mounted() {
+        this.loadFilters();
+    },
+
+    methods: {
+        fetchResults(query) {
+            if (!query) return;
+
+            this.isLoading = true;
+            this.error = null;
+
+            axios.get('http://127.0.0.1:8000/api/search', {
+                params: { input: query },
+            })
+            .then(response => {
+                this.store.searchResults = response.data;
+                console.log("Search Results:", this.store.searchResults["searchResults"]);
+                this.isLoading = false;
+            })
+            .catch(error => {
+                this.error = 'There was an error fetching the search results';
+                console.error("Error fetching search results:", error);
+                this.isLoading = false;
+            });
+        },
+
+        applyFilters() {
+            this.filters = { ...this.tempFilters };
+            localStorage.setItem('filters', JSON.stringify(this.filters));
+        },
+
+        loadFilters() {
+            const savedFilters = localStorage.getItem('filters');
+            if (savedFilters) {
+                this.filters = JSON.parse(savedFilters);
+                this.tempFilters = { ...this.filters };
+            }
+        }
+    },
+
+    computed: {
+        filteredApartments() {
+            return this.store.searchResults.filter(apartment => {
+                const { beds, bathroom, rooms } = this.filters;
+
+                const matchBeds = beds !== null ? apartment.beds >= beds : true;
+                const matchBaths = bathroom !== null ? apartment.bathroom >= bathroom : true;
+                const matchRooms = rooms !== null ? apartment.rooms >= rooms : true;
+
+                return matchBeds && matchBaths && matchRooms;
+            });
+        }
+
+    }
+}
 
 
 </script>
 
 <template>
     <div class="container">
+
         <div v-if="isLoading">Loading...</div>
+
+
         <div v-else>
-            <h1>Risultati vicino <span>{{ query }}</span></h1>
-            <div v-if="error">{{ error }}</div>
-            <ul v-else>
-                <li v-for="result in store.searchResults" :key="result.slug">{{ result.title }}</li>
+            <div>
+                <label>Beds:</label>
+                <input type="number" v-model="tempFilters.beds" />
+            </div>
+            <div>
+                <label>Baths:</label>
+                <input type="number" v-model="tempFilters.bathroom" />
+            </div>
+            <div>
+                <label>Min Square Meters:</label>
+                <input type="number" v-model="tempFilters.rooms" />
+            </div>
+            <button @click="applyFilters">Apply Filters</button>
+
+            <ul>
+                <li v-for="apartment in filteredApartments" :key="apartment.id">
+                    {{ apartment.title }} -
+                    Beds: {{ apartment.beds }}, Baths: {{ apartment.bathroom }}, Rooms: {{ apartment.rooms
+                    }}
+                </li>
             </ul>
-            <ApartmentCard :store="store" />
         </div>
+
+
+        <!-- <ApartmentCard :store="store" /> -->
     </div>
 </template>
 
 <style scoped lang="scss">
-    @use "../style/general" as *;
+@use "../style/general" as *;
 
-    .container {
-        padding-top: $header-height;
-    }
-
-
+.container {
+    padding-top: $header-height;
+}
 </style>

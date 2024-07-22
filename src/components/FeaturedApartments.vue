@@ -45,7 +45,7 @@ export default {
                         page: this.curPage
                     }
                 }).then((resp) => {
-                    console.log(resp);
+                    // console.log(resp);
                     this.totalPage = resp.data.last_page;
                     this.paginatedFeatured = resp.data["data"];
                 })
@@ -54,7 +54,7 @@ export default {
         fetchFeaturedAll() {
             axios.get("http://127.0.0.1:8000/api/featured-mobile").then((resp) => {
                     this.allFeatured = resp.data;
-                    console.log(resp.data);
+                    // console.log(resp.data);
             })
         },
     
