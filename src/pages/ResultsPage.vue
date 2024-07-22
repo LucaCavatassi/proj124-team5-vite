@@ -99,4 +99,12 @@
     </div>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+    @use "../style/general" as *;
+
+    .container {
+        padding-top: $header-height;
+    }
+
+
+</style>
