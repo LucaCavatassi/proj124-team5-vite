@@ -14,8 +14,6 @@
       submitData() {
         if (this.userInput.trim() !== '') {
           this.$router.push({ path: '/results', query: { q: this.userInput, firstSearch: true } });
-        } else {
-          alert('Please enter a search term');
         }
       },
     },

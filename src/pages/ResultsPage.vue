@@ -45,6 +45,7 @@ export default {
 
     mounted() {
         this.loadFilters();
+
     },
 
     methods: {
@@ -63,8 +64,8 @@ export default {
                     this.isLoading = false;
                 })
                 .catch(error => {
-                    this.error = 'There was an error fetching the search results';
-                    console.error("Error fetching search results:", error);
+                    this.error = "C'é stato un errore nel caricare i dati. ";
+                    // console.error("Error fetching search results:", error);
                     this.isLoading = false;
                 });
         },
@@ -81,9 +82,9 @@ export default {
             // If initialSearch flag is present, do not load filters from local storage
             if (query.firstSearch) {
                 this.filters = {
-                beds: null,
-                bathroom: null,
-                rooms: null,
+                    beds: null,
+                    bathroom: null,
+                    rooms: null,
                 };
                 this.tempFilters = { ...this.filters };
             } else {
@@ -107,7 +108,9 @@ export default {
                 const matchRooms = rooms !== null ? apartment.rooms >= rooms : true;
 
                 return matchBeds && matchBaths && matchRooms;
+
             });
+
         }
 
     }
@@ -123,31 +126,50 @@ export default {
 
 
         <div v-else>
-            <div>
-                <label>Beds:</label>
-                <input type="number" v-model="tempFilters.beds" />
-            </div>
-            <div>
-                <label>Baths:</label>
-                <input type="number" v-model="tempFilters.bathroom" />
-            </div>
-            <div>
-                <label>Min Square Meters:</label>
-                <input type="number" v-model="tempFilters.rooms" />
-            </div>
-            <button @click="applyFilters">Apply Filters</button>
-
-            <ul>
-                <li v-for="apartment in filteredApartments" :key="apartment.id">
-                    {{ apartment.title }} -
-                    Beds: {{ apartment.beds }}, Baths: {{ apartment.bathroom }}, Rooms: {{ apartment.rooms
-                    }}
-                </li>
-            </ul>
-        </div>
+            <!-- FILTERS -->
+            <div class="row">
+                <div class="col-3">
+                    <label for="beds">Letti: </label>
+                    <input id="beds" type="number" v-model="tempFilters.beds" />
+                </div>
+                
+                <div class="col-3">
+                    <label for="bathroom">Bagni:</label>
+                    <input id="bathroom" type="number" v-model="tempFilters.bathroom" />
+                </div>
+                
+                <div class="col-3">
+                    <label for="rooms">Stanze: </label>
+                    <input id="rooms" type="number" v-model="tempFilters.rooms" />
+                </div>
+                <div class="col-3">
+                    <button @click="applyFilters">Apply Filters</button>
+                </div>
+            </div> 
 
 
-        <!-- <ApartmentCard :store="store" /> -->
+            <!-- CARDS -->
+            <div class="row">
+                <h1> Ecco cosa abbiamo trovato vicino {{ query }}</h1>
+                <div class="card col-sm-12 col-md-6 col-lg-4 mb-4" v-for="apartment in filteredApartments"
+                    style="width: 18rem;">
+                    <img src="https://hips.hearstapps.com/hmg-prod/images/03-1574758094.jpg" class="card-img-top"
+                        alt="{{ apartment.title }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ apartment.title }}</h5>
+                        <p class="card-text small">{{ apartment.apartment_description }}</p>
+                        <ul>
+                            <li>
+                                Letti: {{ apartment.beds }}, Bagni: {{ apartment.bathroom }}, Stanze: {{ apartment.rooms
+                                }}
+                            </li>
+                        </ul>
+                        <router-link :to="{ name: 'single-result', params: { slug: apartment.slug } }"
+                            class="btn btn-primary">Dettagli</router-link>
+                    </div>
+                </div>
+            </div>
+        </div> 
     </div>
 </template>
 
