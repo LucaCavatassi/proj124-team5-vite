@@ -76,34 +76,34 @@
                 localStorage.setItem('filters', JSON.stringify(this.filters));
             },
 
-        loadFilters() {
-            const query = this.$route.query;
-            console.log(query.firstSearch);
-            const savedFilters = localStorage.getItem('filters');
+            loadFilters() {
+                const query = this.$route.query;
+                console.log(query.firstSearch);
+                const savedFilters = localStorage.getItem('filters');
 
 
-            // If initialSearch flag is present, do not load filters from local storage
-            if (query.firstSearch) {
-                this.filters = {
-                    beds: null,
-                    bathroom: null,
-                    rooms: null,
-                };
-                this.tempFilters = { ...this.filters };
-                localStorage.removeItem('filters');
+                // If initialSearch flag is present, do not load filters from local storage
+                if (query.firstSearch) {
+                    this.filters = {
+                        beds: null,
+                        bathroom: null,
+                        rooms: null,
+                    };
+                    this.tempFilters = { ...this.filters };
+                    localStorage.removeItem('filters');
 
 
-                // Remove initialSearch flag from the URL without reloading the page
-                this.$router.replace({ 
-                path: this.$route.path, 
-                query: { q: query.q }
-                });
-            } else if (savedFilters) {
-                this.filters = JSON.parse(savedFilters);
-                this.tempFilters = { ...this.filters };
+                    // Remove initialSearch flag from the URL without reloading the page
+                    this.$router.replace({
+                        path: this.$route.path,
+                        query: { q: query.q }
+                    });
+                } else if (savedFilters) {
+                    this.filters = JSON.parse(savedFilters);
+                    this.tempFilters = { ...this.filters };
+                }
             }
-        }
-    },
+        },
 
         computed: {
             filteredApartments() {
@@ -129,7 +129,11 @@
 <template>
     <div class="container">
 
-        <div v-if="isLoading">Loading...</div>
+        <div v-if="isLoading">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
 
 
         <div v-else>
