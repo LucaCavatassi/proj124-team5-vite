@@ -132,12 +132,12 @@ export default {
                     <label for="beds">Letti: </label>
                     <input id="beds" type="number" v-model="tempFilters.beds" />
                 </div>
-                
+
                 <div class="col-3">
                     <label for="bathroom">Bagni:</label>
                     <input id="bathroom" type="number" v-model="tempFilters.bathroom" />
                 </div>
-                
+
                 <div class="col-3">
                     <label for="rooms">Stanze: </label>
                     <input id="rooms" type="number" v-model="tempFilters.rooms" />
@@ -145,7 +145,7 @@ export default {
                 <div class="col-3">
                     <button @click="applyFilters">Apply Filters</button>
                 </div>
-            </div> 
+            </div>
 
 
             <!-- CARDS -->
@@ -169,7 +169,7 @@ export default {
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
     </div>
 </template>
 
@@ -178,5 +178,39 @@ export default {
 
 .container {
     padding-top: $header-height;
+}
+
+
+.card {
+    border: none;
+    transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+    overflow: hidden;
+    border-radius: 20px;
+    min-height: 450px;
+    box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.2);
+
+    @media (max-width: 768px) {
+        min-height: 350px;
+    }
+
+    @media (max-width: 420px) {
+        min-height: 300px;
+    }
+
+    .card-footer {
+        background: none;
+        border-top: none;
+
+        .media {
+            img {
+                border: solid 3px rgba(255, 255, 255, 0.3);
+            }
+        }
+    }
+
+    .card-title {
+        font-weight: 800
+    }
+
 }
 </style>
