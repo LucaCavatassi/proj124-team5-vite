@@ -158,24 +158,22 @@
             <!-- CARDS -->
             <div class="row">
                 <h1> Ecco cosa abbiamo trovato vicino {{ query }}</h1>
-                <div class="card col-sm-12 col-md-6 col-lg-4 mb-4" v-for="(apartment, index) in filteredApartments"
-                    style="width: 18rem;" :key="index">
+                <div class="card col-sm-12 col-md-6 col-lg-4 mb-4" v-for="apartment in filteredApartments"
+                    style="width: 18rem;">
                     <img :src="`${imgBaseUrl}/${apartment.img_path}`" class="card-img-top" alt="Apartment Image"
                         v-if="apartment.img_path">
                     <img src="https://t3.ftcdn.net/jpg/05/52/37/18/360_F_552371867_LkVmqMEChRhMMHDQ2drOS8cwhAWehgVc.png"
                         alt="Default Image" v-else>
-
+                        
                     <div class="card-body">
                         <h5 class="card-title">{{ apartment.title }}</h5>
                         <p class="card-text small">{{ apartment.apartment_description }}</p>
-
                         <ul>
                             <li>
                                 Letti: {{ apartment.beds }}, Bagni: {{ apartment.bathroom }}, Stanze: {{ apartment.rooms
                                 }}
                             </li>
                         </ul>
-
                         <router-link :to="{ name: 'single-result', params: { slug: apartment.slug } }"
                             class="btn btn-primary">Dettagli</router-link>
                     </div>
