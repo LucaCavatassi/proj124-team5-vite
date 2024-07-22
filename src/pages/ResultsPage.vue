@@ -133,23 +133,23 @@ export default {
 
         <div v-else>
             <!-- FILTERS -->
-            <div class="row">
-                <div class="col-3">
-                    <label for="beds">Letti: </label>
+            <div class="row align-items-center py-3">
+                <div class="col-3 d-flex flex-column">
+                    <label for="beds">Letti</label>
                     <input id="beds" type="number" v-model="tempFilters.beds" />
                 </div>
 
-                <div class="col-3">
-                    <label for="bathroom">Bagni:</label>
+                <div class="col-3 d-flex flex-column">
+                    <label for="bathroom">Bagni</label>
                     <input id="bathroom" type="number" v-model="tempFilters.bathroom" />
                 </div>
 
-                <div class="col-3">
-                    <label for="rooms">Stanze: </label>
+                <div class="col-3 d-flex flex-column">
+                    <label for="rooms">Stanze</label>
                     <input id="rooms" type="number" v-model="tempFilters.rooms" />
                 </div>
-                <div class="col-3">
-                    <button @click="applyFilters">Apply Filters</button>
+                <div class="col-3 d-flex justify-content-end">
+                    <button @click="applyFilters">Applica Filtri</button>
                 </div>
             </div>
 
