@@ -57,16 +57,16 @@ export default {
             axios.get('http://127.0.0.1:8000/api/search', {
                 params: { input: query },
             })
-            .then(response => {
-                this.store.searchResults = response.data;
-                console.log("Search Results:", this.store.searchResults["searchResults"]);
-                this.isLoading = false;
-            })
-            .catch(error => {
-                this.error = 'There was an error fetching the search results';
-                console.error("Error fetching search results:", error);
-                this.isLoading = false;
-            });
+                .then(response => {
+                    this.store.searchResults = response.data;
+                    // console.log("Search Results:", this.store.searchResults["searchResults"]);
+                    this.isLoading = false;
+                })
+                .catch(error => {
+                    this.error = 'There was an error fetching the search results';
+                    console.error("Error fetching search results:", error);
+                    this.isLoading = false;
+                });
         },
 
         applyFilters() {
@@ -75,10 +75,24 @@ export default {
         },
 
         loadFilters() {
-            const savedFilters = localStorage.getItem('filters');
-            if (savedFilters) {
-                this.filters = JSON.parse(savedFilters);
+            const query = this.$route.query;
+            console.log(query.firstSearch);
+
+            // If initialSearch flag is present, do not load filters from local storage
+            if (query.firstSearch) {
+                this.filters = {
+                beds: null,
+                bathroom: null,
+                rooms: null,
+                };
                 this.tempFilters = { ...this.filters };
+            } else {
+                // Otherwise, load from local storage
+                const savedFilters = localStorage.getItem('filters');
+                if (savedFilters) {
+                    this.filters = JSON.parse(savedFilters);
+                    this.tempFilters = { ...this.filters };
+                }
             }
         }
     },
