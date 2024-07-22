@@ -78,6 +78,8 @@ export default {
         loadFilters() {
             const query = this.$route.query;
             console.log(query.firstSearch);
+            const savedFilters = localStorage.getItem('filters');
+
 
             // If initialSearch flag is present, do not load filters from local storage
             if (query.firstSearch) {
@@ -87,13 +89,17 @@ export default {
                     rooms: null,
                 };
                 this.tempFilters = { ...this.filters };
-            } else {
-                // Otherwise, load from local storage
-                const savedFilters = localStorage.getItem('filters');
-                if (savedFilters) {
-                    this.filters = JSON.parse(savedFilters);
-                    this.tempFilters = { ...this.filters };
-                }
+                localStorage.removeItem('filters');
+
+
+                // Remove initialSearch flag from the URL without reloading the page
+                this.$router.replace({ 
+                path: this.$route.path, 
+                query: { q: query.q }
+                });
+            } else if (savedFilters) {
+                this.filters = JSON.parse(savedFilters);
+                this.tempFilters = { ...this.filters };
             }
         }
     },
