@@ -35,14 +35,19 @@
     --bs-btn-color: #FE5D26;
     --bs-btn-border-color:#FE5D26;
     --bs-btn-hover-bg: #FE5D26;
-    --bs-btn-hover-border-color: #FE5D26;
+    --bs-btn-hover-border-color: #ffffff;
     --bs-btn-active-bg: #FE5D26;
     --bs-btn-active-border-color: #FE5D26;
     --bs-btn-disabled-color: #FE5D26;
     --bs-btn-disabled-border-color: #FE5D26;
+    --bs-btn-background-color: #FE5D26;
+    font-weight: bold;
+    color: white;
+    background-color: #FE5D26;
   }
 
-  .form-control:focus {
-      box-shadow: 0px 0px 10px 0.25rem #FE5D26 ;
+  .form-control:hover {
+    box-shadow: 20px 20px 50px 15px rgb(255, 255, 255); ;
   }
+
 </style>
