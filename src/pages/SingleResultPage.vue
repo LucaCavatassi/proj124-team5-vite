@@ -6,16 +6,17 @@
     export default {
         name: "SingleResultPage",
         props: ['slug'],
-        components: {ContactForm , FeaturedApartments},
+        components: { ContactForm, FeaturedApartments },
         data() {
             return {
                 apartment: null,
                 imgBaseUrl: 'http://127.0.0.1:8000/storage',
-
+                address: null
             };
         },
         created() {
             this.fetchApartmentDetails();
+            this.getAddress();
         },
         methods: {
             fetchApartmentDetails() {
@@ -27,6 +28,14 @@
                     .catch(error => {
                         console.error("Errore nel prendere i dati:", error);
                     });
+            },
+
+            getAddress() {
+                axios.get(`http://127.0.0.1:8000/api/apartment/${this.slug}/address`)
+                .then(response => {
+                    this.address = response.data;
+                    console.log(this.address);
+                })
             }
         }
     }
@@ -35,7 +44,8 @@
 <template>
     <div class="container">
         <div class="row img_container" v-if="apartment">
-            <h1 class="fw-bold text-center">{{ apartment.title }}</h1>
+            <h1 class="fw-bold">{{ apartment.title }}</h1>
+            <p>{{ address.address }}</p>
             <img :src="`${imgBaseUrl}/${apartment.img_path}`" class="card-img-top ms_img" alt="Apartment Image"
                 v-if="apartment.img_path">
             <img class="ms_img card-img-top"
@@ -71,7 +81,7 @@
         </div>
         <FeaturedApartments />
     </div>
-    <ContactForm :apartment_id="apartment.id"/>
+    <ContactForm :apartment_id="apartment.id" />
 
 </template>
 
