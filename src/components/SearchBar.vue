@@ -1,5 +1,6 @@
 <script>
   import { store } from "/src/store.js";
+import axios from "axios"
   
 
   export default {
@@ -16,13 +17,77 @@
           this.$router.push({ path: '/results', query: { q: this.userInput, firstSearch: true } });
         }
       },
+      autocomplete(){
+        const locationInput = document.getElementById('location');
+        const suggestionsContainer = document.getElementById('suggestions');
+        let timeout;
+        // console.log(this.userInput);
+        locationInput.addEventListener("input", () => {
+          let query = locationInput.value;
+          // console.log("query: " + query);
+          if (timeout) clearTimeout(timeout);
+
+          if (query.length >= 4) {
+                timeout = setTimeout(() => {
+                    axios
+                        .get("http://127.0.0.1:8000/api/autocomplete", {
+                            params: {
+                                query: query,
+                            },
+                        })
+                        .then(function (response) {
+                          console.log("risposta: " + response.data);
+                            suggestionsContainer.innerHTML = "";
+                            response.data.forEach(function (item) {
+                                let suggestion = document.createElement("a");
+                                suggestion.href = "#";
+                                suggestion.classList.add(
+                                    "list-group-item",
+                                    "list-group-item-action",
+                                    "suggestion-item"
+                                );
+                                suggestion.textContent = item.address;
+                                suggestionsContainer.appendChild(suggestion);
+
+                                suggestion.addEventListener(
+                                    "click",
+                                    function (event) {
+                                        event.preventDefault();
+                                        locationInput.value = item.address;
+                                        suggestionsContainer.innerHTML = "";
+                                       clearTimeout(this.timeout);
+                                    }
+                                );
+
+                                
+                            });
+                        })
+                        .catch(function (error) {
+                            console.error("Error during search:", error);
+                        });
+                }, 500);
+            } else {
+                suggestionsContainer.innerHTML = "";
+            }
+        })
+
+      },
+      debouncedAutocomplete() {
+            clearTimeout(this.timeout);
+            this.timeout = setTimeout(() => {
+                this.autocomplete(this.userInput);
+            }, 500); 
+        }
     },
   }
 </script>
 
 <template>
-    <form method="POST" class="form-inline my-lg-2 py-2 px-lg-5 my-lg-0 d-flex">
-      <input v-model="userInput" id="location" class="form-control mr-sm-2 me-md-4 py-lg-2" type="search" placeholder="Inserisci la tua prossima destinazione..." aria-label="Search" required>
+    <form method="POST" class="form-inline my-lg-2 py-2 px-lg-5 my-lg-0 d-flex gap-3">
+      <div class="w-100">
+        <input v-model="userInput" id="location" class="form-control mr-sm-2 me-md-4 py-lg-2" type="search" @input="debouncedAutocomplete" placeholder="Inserisci la tua prossima destinazione..." aria-label="Search" required autocomplete="off">
+        <div id="suggestions" class="list-group mt-2"></div>
+      </div>
       <button id="search-btn" class="btn btn-outline-success py-2" @click="submitData">Cerca</button>
     </form>
 </template>
@@ -50,4 +115,10 @@
     box-shadow: 20px 20px 50px 15px rgb(255, 255, 255); ;
   }
 
+  #location{
+    position: relative;
+  }
+  #suggestions{
+    position: absolute;
+  }
 </style>
