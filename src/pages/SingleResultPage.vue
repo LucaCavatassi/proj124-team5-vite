@@ -1,21 +1,18 @@
 <script>
     import axios from 'axios';
-import ContactForm from '../components/ContactForm.vue';
+    import ContactForm from '../components/ContactForm.vue';
     import FeaturedApartments from '../components/FeaturedApartments.vue'
 
     export default {
         name: "SingleResultPage",
         props: ['slug'],
-        components: {ContactForm},
+        components: {ContactForm , FeaturedApartments},
         data() {
             return {
                 apartment: null,
                 imgBaseUrl: 'http://127.0.0.1:8000/storage',
 
             };
-        },
-        components: {
-            FeaturedApartments
         },
         created() {
             this.fetchApartmentDetails();
