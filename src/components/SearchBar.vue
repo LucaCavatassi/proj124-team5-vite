@@ -54,11 +54,11 @@ import axios from "axios"
                                     function (event) {
                                         event.preventDefault();
                                         locationInput.value = item.address;
+                                        self.userInput = item.address; 
                                         suggestionsContainer.innerHTML = "";
                                        clearTimeout(this.timeout);
                                     }
                                 );
-
                                 
                             });
                         })
