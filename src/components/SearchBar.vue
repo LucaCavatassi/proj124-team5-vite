@@ -111,8 +111,8 @@ import axios from "axios"
     background-color: #FE5D26;
   }
 
-  .form-control:hover {
-    box-shadow: 20px 20px 50px 15px rgb(255, 255, 255); ;
+  .form-control:focus {
+    box-shadow: 5px 5px 20px 1px rgb(255, 255, 255); ;
   }
 
   #location{

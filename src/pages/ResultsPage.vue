@@ -1,7 +1,7 @@
 <script>
     import axios from 'axios';
     import { store } from '../store';
-    import ApartmentCard from '../components/ApartmentCard.vue'
+    import ApartmentCard from '../components/ApartmentCard.vue';
 
     export default {
         props: ["query"],
@@ -26,12 +26,14 @@
                     beds: null,
                     bathroom: null,
                     rooms: null,
+                    radius: null
                 },
 
                 tempFilters: {
                     beds: null,
                     bathroom: null,
                     rooms: null,
+                    radius: null
                 }
             };
         },
@@ -46,7 +48,6 @@
 
         mounted() {
             this.loadFilters();
-
         },
 
         methods: {
@@ -57,30 +58,33 @@
                 this.error = null;
 
                 axios.get('http://127.0.0.1:8000/api/search', {
-                    params: { input: query },
+                    params: { 
+                        input: query,
+                        beds: this.filters.beds,
+                        bathroom: this.filters.bathroom,
+                        rooms: this.filters.rooms,
+                        radius: this.filters.radius
+                    },
                 })
-                    .then(response => {
-                        this.store.searchResults = response.data;
-                        // console.log("Search Results:", this.store.searchResults);
-                        this.isLoading = false;
-                    })
-                    .catch(error => {
-                        this.error = "C'é stato un errore nel caricare i dati. ";
-                        // console.error("Error fetching search results:", error);
-                        this.isLoading = false;
-                    });
+                .then(response => {
+                    this.store.searchResults = response.data;
+                    this.isLoading = false;
+                })
+                .catch(error => {
+                    this.error = "C'é stato un errore nel caricare i dati.";
+                    this.isLoading = false;
+                });
             },
 
             applyFilters() {
                 this.filters = { ...this.tempFilters };
                 localStorage.setItem('filters', JSON.stringify(this.filters));
+                this.fetchResults(this.query);  // Richiama fetchResults con i nuovi filtri applicati
             },
 
             loadFilters() {
                 const query = this.$route.query;
-                console.log(query.firstSearch);
                 const savedFilters = localStorage.getItem('filters');
-
 
                 // If initialSearch flag is present, do not load filters from local storage
                 if (query.firstSearch) {
@@ -88,10 +92,10 @@
                         beds: null,
                         bathroom: null,
                         rooms: null,
+                        radius: null
                     };
                     this.tempFilters = { ...this.filters };
                     localStorage.removeItem('filters');
-
 
                     // Remove initialSearch flag from the URL without reloading the page
                     this.$router.replace({
@@ -115,26 +119,20 @@
                     const matchRooms = rooms !== null ? apartment.rooms >= rooms : true;
 
                     return matchBeds && matchBaths && matchRooms;
-
                 });
-
             }
-
         }
     }
-
-
 </script>
+
 
 <template>
     <div class="container">
-
         <div v-if="isLoading">
             <div class="spinner-border text-primary" role="status">
                 <span class="visually-hidden">Loading...</span>
             </div>
         </div>
-
 
         <div v-else>
             <!-- FILTERS -->
@@ -153,11 +151,16 @@
                     <label for="rooms">Stanze</label>
                     <input id="rooms" type="number" v-model="tempFilters.rooms" />
                 </div>
+
+                <div class="col-3 d-flex flex-column">
+                    <label for="radius">Raggio di ricerca</label>
+                    <input id="radius" type="number" v-model="tempFilters.radius" />
+                </div>
+
                 <div class="col-3 d-flex justify-content-end">
                     <button @click="applyFilters">Applica Filtri</button>
                 </div>
             </div>
-
 
             <!-- CARDS -->
             <div class="row">
@@ -173,13 +176,9 @@
                         <h5 class="card-title">{{ apartment.title }}</h5>
                         <p class="card-text small">{{ apartment.apartment_description }}</p>
                         <ul>
-                            <li>
-                                Letti: {{ apartment.beds }}, Bagni: {{ apartment.bathroom }}, Stanze: {{ apartment.rooms
-                                }}
-                            </li>
+                            <li>Letti: {{ apartment.beds }}, Bagni: {{ apartment.bathroom }}, Stanze: {{ apartment.rooms }}</li>
                         </ul>
-                        <router-link :to="{ name: 'single-result', params: { slug: apartment.slug } }"
-                            class="btn btn-primary">Dettagli</router-link>
+                        <router-link :to="{ name: 'single-result', params: { slug: apartment.slug } }" class="btn btn-primary">Dettagli</router-link>
                     </div>
                 </div>
             </div>
