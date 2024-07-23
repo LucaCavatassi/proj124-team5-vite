@@ -1,5 +1,6 @@
 <script>
     import axios from 'axios';
+    import FeaturedApartments from '../components/FeaturedApartments.vue'
 
     export default {
         name: "SingleResultPage",
@@ -9,7 +10,11 @@
             return {
                 apartment: null,
                 imgBaseUrl: 'http://127.0.0.1:8000/storage',
+
             };
+        },
+        components: {
+            FeaturedApartments
         },
         created() {
             this.fetchApartmentDetails();
@@ -31,11 +36,12 @@
 
 <template>
     <div class="container">
-        <div class="row" v-if="apartment">
-            <h1 class="fw-bold">{{ apartment.title }}</h1>
-            <img :src="`${imgBaseUrl}/${apartment.img_path}`" class="card-img-top" alt="Apartment Image"
+        <div class="row img_container" v-if="apartment">
+            <h1 class="fw-bold text-center">{{ apartment.title }}</h1>
+            <img :src="`${imgBaseUrl}/${apartment.img_path}`" class="card-img-top ms_img" alt="Apartment Image"
                 v-if="apartment.img_path">
-            <img src="https://t3.ftcdn.net/jpg/05/52/37/18/360_F_552371867_LkVmqMEChRhMMHDQ2drOS8cwhAWehgVc.png"
+            <img class="ms_img card-img-top"
+                src="https://t3.ftcdn.net/jpg/05/52/37/18/360_F_552371867_LkVmqMEChRhMMHDQ2drOS8cwhAWehgVc.png"
                 alt="Default Image" v-else>
         </div>
         <div v-else>
@@ -43,13 +49,18 @@
                 <span class="visually-hidden">Loading...</span>
             </div>
         </div>
-        <h5>Descrizione: {{ apartment.apartment_description }}</h5>
-        <div class="row mt-3">
+        <div class="row ms_row p-4 mt-3">
+            <h3>Descrizione:</h3>
+            <p>{{ apartment.apartment_description }}</p>
+        </div>
+        <div class="row ms_row p-4 mt-3 mb-5">
             <div class="col-6">
                 <h5>Caratteristiche</h5>
-                <p>Bagni: {{ apartment.bathroom }}</p>
-                <p>Camere da letto: {{ apartment.beds }}</p>
-                <p>Dimensione: {{ apartment.square_mt }}</p>
+                <ul>
+                    <li>Bagni: {{ apartment.bathroom }}</li>
+                    <li>Camere da letto: {{ apartment.beds }}</li>
+                    <li>Dimensione: {{ apartment.square_mt }}</li>
+                </ul>
             </div>
             <div class="col-6">
                 <h5>Servizi</h5>
@@ -60,11 +71,21 @@
                 </ul>
             </div>
         </div>
+        <FeaturedApartments />
     </div>
 </template>
 
 <style scoped lang="scss">
     .container {
         margin-top: 6rem;
+
+        .ms_img {
+            border-radius: 2rem;
+        }
+
+        .ms_row {
+            border-radius: 50px;
+            background-color: rgb(234, 234, 234);
+        }
     }
 </style>
