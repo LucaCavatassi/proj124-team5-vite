@@ -1,10 +1,11 @@
 <script>
     import axios from 'axios';
+import ContactForm from '../components/ContactForm.vue';
 
     export default {
         name: "SingleResultPage",
         props: ['slug'],
-
+        components: {ContactForm},
         data() {
             return {
                 apartment: null,
@@ -33,6 +34,7 @@
     <div class="container">
         <div class="row" v-if="apartment">
             <h1 class="fw-bold">{{ apartment.title }}</h1>
+
             <img :src="`${imgBaseUrl}/${apartment.img_path}`" class="card-img-top" alt="Apartment Image"
                 v-if="apartment.img_path">
             <img src="https://t3.ftcdn.net/jpg/05/52/37/18/360_F_552371867_LkVmqMEChRhMMHDQ2drOS8cwhAWehgVc.png"
@@ -52,7 +54,10 @@
                 {{service.title}}
             </li>
         </ul>
+
     </div>
+    <ContactForm :apartment_id="apartment.id"/>
+
 </template>
 
 <style scoped lang="scss">
