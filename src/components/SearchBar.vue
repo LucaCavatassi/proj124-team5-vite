@@ -17,61 +17,45 @@ import axios from "axios"
           this.$router.push({ path: '/results', query: { q: this.userInput, firstSearch: true } });
         }
       },
-      autocomplete(){
-        const locationInput = document.getElementById('location');
-        const suggestionsContainer = document.getElementById('suggestions');
-        let timeout;
-        // console.log(this.userInput);
-        locationInput.addEventListener("input", () => {
-          let query = locationInput.value;
-          // console.log("query: " + query);
-          if (timeout) clearTimeout(timeout);
+      autocomplete() {
+    const locationInput = document.getElementById('location');
+    const suggestionsContainer = document.getElementById('suggestions');
+    let timeout;
 
-          if (query.length >= 4) {
-                timeout = setTimeout(() => {
-                    axios
-                        .get("http://127.0.0.1:8000/api/autocomplete", {
-                            params: {
-                                query: query,
-                            },
-                        })
-                        .then(function (response) {
-                          console.log("risposta: " + response.data);
-                            suggestionsContainer.innerHTML = "";
-                            response.data.forEach(function (item) {
-                                let suggestion = document.createElement("a");
-                                suggestion.href = "#";
-                                suggestion.classList.add(
-                                    "list-group-item",
-                                    "list-group-item-action",
-                                    "suggestion-item"
-                                );
-                                suggestion.textContent = item.address;
-                                suggestionsContainer.appendChild(suggestion);
+    locationInput.addEventListener("input", () => {
+        let query = locationInput.value;
 
-                                suggestion.addEventListener(
-                                    "click",
-                                    function (event) {
-                                        event.preventDefault();
-                                        locationInput.value = item.address;
-                                        self.userInput = item.address; 
-                                        suggestionsContainer.innerHTML = "";
-                                       clearTimeout(this.timeout);
-                                    }
-                                );
-                                
+        if (timeout) clearTimeout(timeout);
+        if (query.length >= 4) {
+            timeout = setTimeout(() => {
+                axios
+                    .get("http://127.0.0.1:8000/api/autocomplete", { params: { query: query } })
+                    .then(response => {
+                        console.log("response: " + response.data);
+                        suggestionsContainer.innerHTML = "";
+                        response.data.forEach(item => {
+                            let suggestion = document.createElement("a");
+                            suggestion.href = "#";
+                            suggestion.classList.add(
+                                "list-group-item",
+                                "list-group-item-action",
+                                "suggestion-item"
+                            );
+                            suggestion.textContent = item.address;
+                            suggestionsContainer.appendChild(suggestion);
+
+                            suggestion.addEventListener("click", event => {
+                                event.preventDefault();
+                                locationInput.value = item.address;
+                                this.userInput = item.address; 
+                                suggestionsContainer.innerHTML = "";
                             });
-                        })
-                        .catch(function (error) {
-                            console.error("Error during search:", error);
                         });
-                }, 500);
-            } else {
-                suggestionsContainer.innerHTML = "";
-            }
-        })
-
-      },
+                    });
+            }, 300); 
+        }
+    });
+},
       debouncedAutocomplete() {
             clearTimeout(this.timeout);
             this.timeout = setTimeout(() => {
