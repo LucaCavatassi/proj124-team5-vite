@@ -61,7 +61,7 @@
                 })
                     .then(response => {
                         this.store.searchResults = response.data;
-                        // console.log("Search Results:", this.store.searchResults["searchResults"]);
+                        // console.log("Search Results:", this.store.searchResults);
                         this.isLoading = false;
                     })
                     .catch(error => {
