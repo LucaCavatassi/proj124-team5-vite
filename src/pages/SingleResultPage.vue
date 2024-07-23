@@ -48,7 +48,7 @@
             <p>{{ address.address }}</p>
             <img :src="`${imgBaseUrl}/${apartment.img_path}`" class="card-img-top ms_img" alt="Apartment Image"
                 v-if="apartment.img_path">
-            <img class="ms_img card-img-top"
+            <img class="ms_img card-img-top w-25"
                 src="https://t3.ftcdn.net/jpg/05/52/37/18/360_F_552371867_LkVmqMEChRhMMHDQ2drOS8cwhAWehgVc.png"
                 alt="Default Image" v-else>
         </div>
@@ -81,7 +81,7 @@
         </div>
         <FeaturedApartments />
     </div>
-    <ContactForm :apartment_id="apartment.id" />
+    <ContactForm :apartment_id="apartment.id" class="mb-3" />
 
 </template>
 

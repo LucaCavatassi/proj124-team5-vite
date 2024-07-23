@@ -102,7 +102,7 @@ export default {
                         </div>
                     </div>
 
-                    <button @click.prevent="sendForm" type="submit" class="btn btn-primary" :disabled="isLoading">
+                    <button @click.prevent="sendForm" type="submit" class="btn btn-primary ms_btn" :disabled="isLoading">
                         <span v-if="!isLoading"> Invia </span>
                         <div v-else class="spinner-border" role="status">
                             <span class="visually-hidden">Loading...</span>
@@ -113,3 +113,10 @@ export default {
         </div>
     </div>
 </template>
+
+<style lang="scss">
+    .btn.ms_btn {
+        background-color: #FE5D26;
+        border: none;
+    }
+</style>
