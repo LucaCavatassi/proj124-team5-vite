@@ -137,34 +137,34 @@ export default {
 
     <div v-else>
       <!-- FILTERS -->
-      <div class="row align-items-center py-3">
-        <div class="col-3 d-flex flex-column">
-          <label for="beds">Letti</label>
-          <input id="beds" type="number" v-model="tempFilters.beds" />
+      <div class="row align-items-center ms-search justify-content-between py-2 mt-3">
+        <div class="col d-flex flex-column">
+          <label class="text-center" for="beds">Letti</label>
+          <input placeholder="0" class="ms-column text-center" id="beds" type="number" v-model="tempFilters.beds" />
         </div>
 
-        <div class="col-3 d-flex flex-column">
-          <label for="bathroom">Bagni</label>
-          <input id="bathroom" type="number" v-model="tempFilters.bathroom" />
+        <div class="col d-flex flex-column">
+          <label class="text-center" for="bathroom">Bagni</label>
+          <input placeholder="0" class="ms-column text-center" id="bathroom" type="number" v-model="tempFilters.bathroom" />
         </div>
 
-        <div class="col-3 d-flex flex-column">
-          <label for="rooms">Stanze</label>
-          <input id="rooms" type="number" v-model="tempFilters.rooms" />
+        <div class="col d-flex flex-column">
+          <label class="text-center" for="rooms">Stanze</label>
+          <input placeholder="0" class="ms-column text-center"id="rooms" type="number" v-model="tempFilters.rooms" />
         </div>
 
-        <div class="col-3 d-flex flex-column">
-          <label for="radius">Raggio di ricerca</label>
-          <input id="radius" type="number" v-model="tempFilters.radius" />
+        <div class="col d-flex flex-column">
+          <label class="text-center" for="radius">Raggio di ricerca</label>
+          <input placeholder="0" class="ms-column text-center"id="radius" type="number" v-model="tempFilters.radius" />
         </div>
 
-        <div class="col-3 d-flex justify-content-end">
-          <button @click="applyFilters">Applica Filtri</button>
+        <div class="col d-flex justify-content-center">
+          <button class=" search-btn" @click="applyFilters"><i class="fa-solid fa-magnifying-glass"></i></button>
         </div>
       </div>
 
       <!-- CARDS -->
-      <h1>Ecco cosa abbiamo trovato vicino {{ query }}</h1>
+      <h1 class="mt-4">Ecco cosa abbiamo trovato vicino {{ query }}</h1>
       <div class="row row-cols-lg-3 row-cols-2 g-4 mt-3">
         <div
           class="col"
@@ -266,5 +266,39 @@ export default {
   color: $white;
 }
 
+.ms-search {
+  border: 1px solid lightgray;
+  border-radius: 40px;
+}
 
+.search-btn {
+  border: none;
+  background-color: #fb7a4f;
+  border-radius: 50%;
+  font-size: 20px;
+  width: 60px;
+  height: 60px;
+  padding: 10px;
+  color: white;
+  line-height: 10px;
+}
+
+.ms-column {
+  border: none;
+  border-right: 1px solid lightgray;
+}
+
+.ms-column:active,
+.ms-column:focus{
+  outline: none;
+  background-color: white;
+  border: none;
+
+}
+
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 </style>
