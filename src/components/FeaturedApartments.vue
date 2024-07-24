@@ -157,9 +157,4 @@
 		color: $white;
 	}
 
-	@media only screen and (min-width: 600px) {
-		.ms_wrap {
-			background-color: aqua;
-		}
-	}
 </style>
