@@ -130,7 +130,6 @@
 					<div class="card-body">
 						<h5 class="card-title">{{ featured.title }}</h5>
 						<p class="card-text">{{ featured.apartment_description }}</p>
-						<a href="#" class="btn ms_btn">Scopri di più</a>
 						<router-link :to="{ name: 'single-result', params: { slug: featured.slug } }"
 							class="btn btn-primary ms_btn">Scopri di più</router-link>
 					</div>
