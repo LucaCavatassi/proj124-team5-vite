@@ -137,70 +137,76 @@ export default {
 
     <div v-else>
       <!-- FILTERS -->
-      <div class="row align-items-center ms-search justify-content-between py-2 mt-3">
-        <div class="col d-flex flex-column">
-          <label class="text-center" for="beds">Letti</label>
-          <input placeholder="0" class="ms-column text-center" id="beds" type="number" v-model="tempFilters.beds" />
+      <div class="row align-items-center py-3">
+        <div class="col-3 d-flex flex-column">
+          <label for="beds">Letti</label>
+          <input id="beds" type="number" v-model="tempFilters.beds" />
         </div>
 
-        <div class="col d-flex flex-column">
-          <label class="text-center" for="bathroom">Bagni</label>
-          <input placeholder="0" class="ms-column text-center" id="bathroom" type="number" v-model="tempFilters.bathroom" />
+        <div class="col-3 d-flex flex-column">
+          <label for="bathroom">Bagni</label>
+          <input id="bathroom" type="number" v-model="tempFilters.bathroom" />
         </div>
 
-        <div class="col d-flex flex-column">
-          <label class="text-center" for="rooms">Stanze</label>
-          <input placeholder="0" class="ms-column text-center"id="rooms" type="number" v-model="tempFilters.rooms" />
+        <div class="col-3 d-flex flex-column">
+          <label for="rooms">Stanze</label>
+          <input id="rooms" type="number" v-model="tempFilters.rooms" />
         </div>
 
-        <div class="col d-flex flex-column">
-          <label class="text-center" for="radius">Raggio di ricerca</label>
-          <input placeholder="0" class="ms-column text-center"id="radius" type="number" v-model="tempFilters.radius" />
+        <div class="col-3 d-flex flex-column">
+          <label for="radius">Raggio di ricerca</label>
+          <input id="radius" type="number" v-model="tempFilters.radius" />
         </div>
 
-        <div class="col d-flex justify-content-center">
-          <button class=" search-btn" @click="applyFilters"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <div class="col-3 d-flex justify-content-end">
+          <button @click="applyFilters">Applica Filtri</button>
         </div>
       </div>
 
       <!-- CARDS -->
-      <h1 class="mt-4">Ecco cosa abbiamo trovato vicino {{ query }}</h1>
-      <div class="row row-cols-lg-3 row-cols-2 g-4 mt-3">
-        <div
-          class="col"
-          v-for="apartment in filteredApartments"
-          :key="apartment"
-        >
-          <router-link
-            :to="{ name: 'single-result', params: { slug: apartment.slug } }"
-            class="text-decoration-none"
+      <h1>Ecco cosa abbiamo trovato vicino {{ query }}:</h1>
+
+      <div v-if="filteredApartments.length === 0">
+        <h3>La ricerca non ha prodott risultati.</h3>
+      </div>
+      <div v-else>
+        <div class="row row-cols-lg-3 row-cols-2 g-4 mt-3">
+          <div
+            class="col"
+            v-for="apartment in filteredApartments"
+            :key="apartment"
           >
-            <div class="card h-100">
-              <img
-                :src="`${imgBaseUrl}/${apartment.img_path}`"
-                class="card-img-top"
-                alt="Apartment Image"
-                v-if="apartment.img_path"
-              />
-              <img
-                src="https://t3.ftcdn.net/jpg/05/52/37/18/360_F_552371867_LkVmqMEChRhMMHDQ2drOS8cwhAWehgVc.png"
-                alt="Default Image"
-                v-else
-              />
+            <router-link
+              :to="{ name: 'single-result', params: { slug: apartment.slug } }"
+              class="text-decoration-none"
+            >
+              <div class="card h-100">
+                <img
+                  :src="`${imgBaseUrl}/${apartment.img_path}`"
+                  class="card-img-top"
+                  alt="Apartment Image"
+                  v-if="apartment.img_path"
+                />
+                <img
+                  src="https://t3.ftcdn.net/jpg/05/52/37/18/360_F_552371867_LkVmqMEChRhMMHDQ2drOS8cwhAWehgVc.png"
+                  alt="Default Image"
+                  v-else
+                />
 
-              <div class="card-body d-flex flex-column justify-content-start">
-                <h5 class="card-title">{{ apartment.title }}</h5>
-                <p class="card-text">{{ apartment.apartment_description }}</p>
-                <ul class="list-unstyled">
-                  <li>
-                    Letti: {{ apartment.beds }}, Bagni:
-                    {{ apartment.bathroom }}, Stanze: {{ apartment.rooms }}
-                  </li>
-                </ul>
+                <div class="card-body d-flex flex-column justify-content-start">
+                  <h5 class="card-title">{{ apartment.title }}</h5>
+                  <p class="card-text">{{ apartment.apartment_description }}</p>
+                  <ul class="list-unstyled">
+                    <li>
+                      Letti: {{ apartment.beds }}, Bagni:
+                      {{ apartment.bathroom }}, Stanze: {{ apartment.rooms }}
+                    </li>
+                  </ul>
 
+                </div>
               </div>
-            </div>
-          </router-link>
+            </router-link>
+          </div>
         </div>
       </div>
     </div>
@@ -220,85 +226,48 @@ export default {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s;
   min-height: 500px;
-  
-}
 
-.card:hover {
-  transform: scale(1.05);
-}
+  &:hover {
+    transform: scale(1.05);
+  }
 
-.card-img-top {
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  min-height: 300px;
-  object-fit: cover;
-  object-position: center;
-}
+  .card-img-top {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    min-height: 300px;
+    object-fit: cover;
+    object-position: center;
+  }
 
-.card-body {
-  padding: 15px;
-}
+  .card-body {
+    padding: 15px;
+  }
 
-.card-title {
-  font-size: 1.25rem;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
 
-.card-text {
-  font-size: 0.9rem;
-  color: #555;
-}
+  .card-text {
+    font-size: 0.9rem;
+    color: #555;
+  }
 
-.list-unstyled {
-  padding-left: 0;
-  list-style: none;
-  margin-bottom: 15px;
+  .list-unstyled {
+    padding-left: 0;
+    list-style: none;
+    margin-bottom: 15px;
+  }
 }
 
 .ms_btn {
   background-color: $orange;
   color: $white;
-}
 
-.ms_btn:hover {
-  background-color: #fb7a4f;
-  color: $white;
-}
-
-.ms-search {
-  border: 1px solid lightgray;
-  border-radius: 40px;
-}
-
-.search-btn {
-  border: none;
-  background-color: #fb7a4f;
-  border-radius: 50%;
-  font-size: 20px;
-  width: 60px;
-  height: 60px;
-  padding: 10px;
-  color: white;
-  line-height: 10px;
-}
-
-.ms-column {
-  border: none;
-  border-right: 1px solid lightgray;
-}
-
-.ms-column:active,
-.ms-column:focus{
-  outline: none;
-  background-color: white;
-  border: none;
-
-}
-
-input::-webkit-inner-spin-button,
-input::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+  &:hover {
+    background-color: #fb7a4f;
+    color: $white;
+  }
 }
 </style>
