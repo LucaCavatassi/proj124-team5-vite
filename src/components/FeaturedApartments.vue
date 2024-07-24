@@ -100,43 +100,43 @@
 					</button>
 				</div>
 			</div>
-		</div>
-	</div>
-
-	<div v-if="screenSize === 'large'" class="container">
-		<div class="row">
-			<div class="col-4 py-5" v-for="featured in this.paginatedFeatured">
-				<div class="card">
-					<img src="https://www.apartments.com/blog/sites/default/files/styles/x_large_hq/public/image/2023-06/ParkLine-apartment-in-Miami-FL.jpg?itok=kQmw64UU"
-						class="card-img-top" alt="" />
-					<div class="card-body">
-						<h5 class="card-title">{{ featured.title }}</h5>
-						<p class="card-text">{{ featured.apartment_description }}</p>
-
-						<router-link :to="{ name: 'single-result', params: { slug: featured.slug } }"
-							class="btn btn-primary ms_btn">Scopri di più</router-link>
+			<div v-if="screenSize === 'large'" class="container">
+				<div class="row">
+					<div class="col-4 py-5" v-for="featured in this.paginatedFeatured">
+						<div class="card">
+							<img src="https://www.apartments.com/blog/sites/default/files/styles/x_large_hq/public/image/2023-06/ParkLine-apartment-in-Miami-FL.jpg?itok=kQmw64UU"
+								class="card-img-top" alt="" />
+							<div class="card-body">
+								<h5 class="card-title">{{ featured.title }}</h5>
+								<p class="card-text">{{ featured.apartment_description }}</p>
+		
+								<router-link :to="{ name: 'single-result', params: { slug: featured.slug } }"
+									class="btn btn-primary ms_btn">Scopri di più</router-link>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+			<div v-if="screenSize === 'small'" class="container">
+				<div class="row">
+					<div class="col-12 py-5" v-for="featured in this.allFeatured">
+						<div class="card">
+							<img src="https://www.apartments.com/blog/sites/default/files/styles/x_large_hq/public/image/2023-06/ParkLine-apartment-in-Miami-FL.jpg?itok=kQmw64UU"
+								class="card-img-top" alt="" />
+							<div class="card-body">
+								<h5 class="card-title">{{ featured.title }}</h5>
+								<p class="card-text">{{ featured.apartment_description }}</p>
+								<router-link :to="{ name: 'single-result', params: { slug: featured.slug } }"
+									class="btn btn-primary ms_btn">Scopri di più</router-link>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div v-if="screenSize === 'small'" class="container">
-		<div class="row">
-			<div class="col-12 py-5" v-for="featured in this.allFeatured">
-				<div class="card">
-					<img src="https://www.apartments.com/blog/sites/default/files/styles/x_large_hq/public/image/2023-06/ParkLine-apartment-in-Miami-FL.jpg?itok=kQmw64UU"
-						class="card-img-top" alt="" />
-					<div class="card-body">
-						<h5 class="card-title">{{ featured.title }}</h5>
-						<p class="card-text">{{ featured.apartment_description }}</p>
-						<router-link :to="{ name: 'single-result', params: { slug: featured.slug } }"
-							class="btn btn-primary ms_btn">Scopri di più</router-link>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 </template>
 
 <style scoped lang="scss">

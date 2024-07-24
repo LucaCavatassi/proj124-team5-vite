@@ -13,22 +13,13 @@
 </script>
 
 <template>
-    <div class="ms_carousel">
-        <CarouselJumbo/>
-    
-    </div>
+    <CarouselJumbo/>
     <FeaturedApartments/>
 </template>
 
 <style scoped lang="scss">
     @use "../style/general/" as *;
 
-
-        .ms_container_home {
-            position: relative;
-            z-index: 2;
-            
-        }
         h1 {
             font-weight: bold;
             color: $white;
