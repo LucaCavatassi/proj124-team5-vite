@@ -112,7 +112,7 @@ import axios from "axios"
   }
 
   .form-control:focus {
-    box-shadow: 5px 5px 20px 1px rgb(255, 255, 255); ;
+    box-shadow: 5px 5px 20px 1px #fe5c26; ;
   }
 
   #location{
