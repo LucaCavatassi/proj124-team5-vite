@@ -80,7 +80,7 @@ export default {
     applyFilters() {
       this.filters = { ...this.tempFilters };
       localStorage.setItem("filters", JSON.stringify(this.filters));
-      this.fetchResults(this.query); // Richiama fetchResults con i nuovi filtri applicati
+      this.fetchResults(this.query); 
     },
 
     loadFilters() {
@@ -172,7 +172,7 @@ export default {
       <h1>Ecco cosa abbiamo trovato vicino {{ query }}:</h1>
 
       <div v-if="filteredApartments.length === 0">
-        <h3>La ricerca non ha prodott risultati.</h3>
+        <h3>La ricerca non ha prodotto risultati.</h3>
       </div>
       <div v-else>
         <div class="row row-cols-lg-3 row-cols-2 g-4 mt-3">
