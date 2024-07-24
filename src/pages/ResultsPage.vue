@@ -138,31 +138,31 @@ export default {
     <div v-else>
       <!-- FILTERS -->
       <div class="row align-items-center ms-search justify-content-between py-2 mt-3">
-        <div class="col d-flex flex-column">
+        <div class="col col-md-6 col-sm-12 d-flex flex-column">
             <label class="text-center" for="beds">Letti</label>
             <input placeholder="0" class="ms-column text-center" id="beds" type="number"
                 v-model="tempFilters.beds" />
         </div>
 
-        <div class="col d-flex flex-column">
+        <div class="col col-md-6 col-sm-12 d-flex flex-column">
             <label class="text-center" for="bathroom">Bagni</label>
             <input placeholder="0" class="ms-column text-center" id="bathroom" type="number"
                 v-model="tempFilters.bathroom" />
         </div>
 
-        <div class="col d-flex flex-column">
+        <div class="col col-md-6 col-sm-12 d-flex flex-column">
             <label class="text-center" for="rooms">Stanze</label>
             <input placeholder="0" class="ms-column text-center" id="rooms" type="number"
                 v-model="tempFilters.rooms" />
         </div>
 
-        <div class="col d-flex flex-column">
+        <div class="col col-md-6 col-sm-12 d-flex flex-column">
             <label class="text-center" for="radius">Raggio di ricerca</label>
             <input placeholder="0" class="ms-column text-center" id="radius" type="number"
                 v-model="tempFilters.radius" />
         </div>
 
-        <div class="col d-flex justify-content-center">
+        <div class="col col-md-12 col-sm-12 d-flex justify-content-center">
             <button class=" search-btn" @click="applyFilters"><i
                     class="fa-solid fa-magnifying-glass"></i></button>
         </div>
