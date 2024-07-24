@@ -85,8 +85,8 @@ export default {
                         </div>
                     </div>
 
-                    <button @click.prevent="sendForm" type="submit" class="btn btn-primary ms_btn" :disabled="isLoading">
-                        <span v-if="!isLoading"> Invia </span>
+                    <button @click.prevent="sendForm" type="submit" class="btn ms_btn" :disabled="isLoading">
+                        <span class="text-white" v-if="!isLoading"> Invia </span>
                         <div v-else class="spinner-border" role="status">
                             <span class="visually-hidden">Loading...</span>
                         </div>
@@ -103,4 +103,9 @@ export default {
         background-color: #FE5D26;
         border: none;
     }
+
+    .btn.ms_btn:hover {
+        background-color: #fc9775;
+    }
+
 </style>
