@@ -10,9 +10,7 @@ export default {
         return {
             form: {
                 name: "",
-                lastname: "",
                 mail: "",
-                phone_number: "",
                 message: "",
                 apartment_id: this.apartment_id
             },
@@ -42,9 +40,7 @@ export default {
         },
         clearFields() {
             this.form.name = "";
-            this.form.lastname = "";
             this.form.mail = "";
-            this.form.phone_number = "";
             this.form.message = "";
         },
     },
@@ -54,49 +50,36 @@ export default {
 <template>
     <div class="container mt-5">
         <div class="row">
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-8 offset-md-2">
                 <h1>Contattaci!</h1>
                 <div class="alert alert-success" v-if="contactSend">
                     Il tuo messaggio è stato inviato con successo
                 </div>
                 <form>
                     <input type="hidden" :value="apartment_id" name="apartment_id" />
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Nome</label>
-                        <input type="text" class="form-control" :class="{ 'is-invalid': errors.name }" id="name"
-                            v-model="form.name" />
-                        <div class="invalid-feedback" v-if="errors.name">
-                            {{ errors.name[0] }}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Nome <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" :class="{ 'is-invalid': errors.name }" id="name" v-model="form.name" placeholder="Inserisci il tuo nome" />
+                                <div class="invalid-feedback" v-if="errors.name">
+                                    {{ errors.name[0] }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="mail" class="form-label">Mail <span class="text-danger">*</span></label>
+                                <input type="mail" class="form-control" :class="{ 'is-invalid': errors.mail }" id="mail" v-model="form.mail" placeholder="Inserisci la tua mail" />
+                                <div class="invalid-feedback" v-if="errors.mail">
+                                    {{ errors.mail[0] }}
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="lastname" class="form-label">Cognome</label>
-                        <input type="text" class="form-control" :class="{ 'is-invalid': errors.lastname }" id="lastname"
-                            v-model="form.lastname" />
-                        <div class="invalid-feedback" v-if="errors.lastname">
-                            {{ errors.lastname[0] }}
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="mail" class="form-label">Mail</label>
-                        <input type="mail" class="form-control" :class="{ 'is-invalid': errors.mail }" id="mail"
-                            v-model="form.mail" />
-                        <div class="invalid-feedback" v-if="errors.mail">
-                            {{ errors.mail[0] }}
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="phone_number" class="form-label">Numero di telefono</label>
-                        <input type="tel" class="form-control" :class="{ 'is-invalid': errors.phone_number }"
-                            id="phone_number" v-model="form.phone_number" />
-                        <div class="invalid-feedback" v-if="errors.phone_number">
-                            {{ errors.phone_number[0] }}
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="message" class="form-label">Messaggio</label>
-                        <textarea class="form-control" :class="{ 'is-invalid': errors.message }" id="message"
-                            v-model="form.message"></textarea>
+                        <label for="message" class="form-label">Messaggio <span class="text-danger">*</span></label>
+                        <textarea class="form-control" :class="{ 'is-invalid': errors.message }" id="message" v-model="form.message" placeholder="Inserisci il tuo messaggio"></textarea>
                         <div class="invalid-feedback" v-if="errors.message">
                             {{ errors.message[0] }}
                         </div>
@@ -109,6 +92,7 @@ export default {
                         </div>
                     </button>
                 </form>
+                <p class="mt-3"><small>Compila i campi contrassegnati con <span class="text-danger">*</span>.</small></p>
             </div>
         </div>
     </div>
