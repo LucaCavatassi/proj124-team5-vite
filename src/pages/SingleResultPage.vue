@@ -88,7 +88,7 @@
 				</ul>
 			</div>
 		</div>
-		<FeaturedApartments />
+
 	</div>
 	<ContactForm :apartment_id="apartment.id" class="mb-3" />
 </template>
