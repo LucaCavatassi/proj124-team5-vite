@@ -13,16 +13,22 @@
             <div class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="/src/assets/jumbo/jumbo_1.jpg" alt="jumbo_img1">
+                        <img src="/src/assets/jumbo/jumbo_1.avif" alt="jumbo_img1">
                     </div>
                     <div class="carousel-item">
-                        <img src="/src/assets/jumbo/jumbo_2.jpg"  alt="jumbo_img2">
+                        <img src="/src/assets/jumbo/jumbo_2.avif"  alt="jumbo_img2">
                     </div>
                     <div class="carousel-item">
-                        <img src="/src/assets/jumbo/jumbo_3.jpg"  alt="jumbo_img3">
+                        <img src="/src/assets/jumbo/jumbo_3.avif"  alt="jumbo_img3">
                     </div>
                     <div class="carousel-item">
-                        <img src="/src/assets/jumbo/jumbo_4.jpg"  alt="jumbo_img4">
+                        <img src="/src/assets/jumbo/jumbo_4.avif"  alt="jumbo_img4">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/src/assets/jumbo/jumbo_5.avif"  alt="jumbo_img5">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/src/assets/jumbo/jumbo_6.avif"  alt="jumbo_img6">
                     </div>
                 </div>
                 <div class="overlay">
