@@ -231,6 +231,8 @@ export default {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   min-height: 300px;
+  object-fit: cover;
+  object-position: center;
 }
 
 .card-body {
