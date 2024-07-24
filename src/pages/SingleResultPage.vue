@@ -11,12 +11,10 @@
 			return {
 				apartment: null,
 				imgBaseUrl: "http://127.0.0.1:8000/storage",
-				address: null,
 			};
 		},
 		created() {
 			this.fetchApartmentDetails();
-			this.getAddress();
 		},
 		methods: {
 			fetchApartmentDetails() {
@@ -31,12 +29,6 @@
 					});
 			},
 
-			getAddress() {
-				axios.get(`http://127.0.0.1:8000/api/apartment/${this.slug}/address`).then((response) => {
-					this.address = response.data;
-					console.log(this.address);
-				});
-			},
 			goBackToResults() {
 			this.$router.push({ name: "SearchResults", query: { q: this.$route.query.q } });
 		},
@@ -54,7 +46,7 @@
 		</div>
 		<div class="row img_container" v-if="apartment">
 			<h1 class="fw-bold">{{ apartment.title }}</h1>
-			<p>{{ address.address }}</p>
+			<p>{{ apartment.address }}</p>
 			<img :src="`${imgBaseUrl}/${apartment.img_path}`" class="card-img-top ms_img" alt="Apartment Image"
 				v-if="apartment.img_path" />
 			<img class="ms_img card-img-top w-25"
@@ -82,7 +74,7 @@
 			<div class="col-6">
 				<h5>Servizi</h5>
 				<ul>
-					<li v-for="(service, index) in apartment.services">
+					<li v-for="(service, index) in apartment.services" :key="index">
 						{{ service.title }}
 					</li>
 				</ul>
