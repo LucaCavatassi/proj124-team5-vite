@@ -128,14 +128,14 @@ export default {
 </script>
 
 <template>
-  <div class="container mb-5">
+  <div class="container mb-5 d-flex flex-column min-vh-100">
     <div v-if="isLoading">
       <div class="spinner-border text-primary" role="status">
         <span class="visually-hidden">Loading...</span>
       </div>
     </div>
 
-    <div v-else>
+    <div v-else class="flex-grow-1">
       <!-- FILTERS -->
       <div class="row align-items-center ms-search justify-content-between py-2 mt-3">
         <div class="col-lg-2 col-md-6 col-sm-12 d-flex flex-column">
@@ -168,49 +168,51 @@ export default {
         </div>
     </div>
 
-      <!-- CARDS -->
-      <h1>Ecco cosa abbiamo trovato vicino {{ query }}:</h1>
-
-      <div v-if="filteredApartments.length === 0">
-        <h3>La ricerca non ha prodotto risultati.</h3>
-      </div>
-      <div v-else>
-        <div class="row row-cols-lg-3 row-cols-2 g-4 mt-3">
-          <div
-            class="col"
-            v-for="apartment in filteredApartments"
-            :key="apartment"
-          >
-            <router-link
-              :to="{ name: 'single-result', params: { slug: apartment.slug } }"
-              class="text-decoration-none"
+      <!-- RESULTS -->
+      <div class="results mt-4">
+        <h1 class="results-title text-center">Ecco cosa abbiamo trovato per te:</h1>
+        <div v-if="filteredApartments.length === 0" class="no-results d-flex flex-column align-items-center justify-content-center">
+          <i class="fa-solid fa-magnifying-glass fa-3x mb-3"></i>
+          <h3 class="text-center">"La ricerca non ha prodotto risultati."</h3>
+        </div>
+        <div v-else>
+          <div class="row row-cols-lg-3 row-cols-2 g-4 mt-3">
+            <div
+              class="col"
+              v-for="apartment in filteredApartments"
+              :key="apartment"
             >
-              <div class="card h-100">
-                <img
-                  :src="`${imgBaseUrl}/${apartment.img_path}`"
-                  class="card-img-top"
-                  alt="Apartment Image"
-                  v-if="apartment.img_path"
-                />
-                <img
-                  src="https://t3.ftcdn.net/jpg/05/52/37/18/360_F_552371867_LkVmqMEChRhMMHDQ2drOS8cwhAWehgVc.png"
-                  alt="Default Image"
-                  v-else
-                />
+              <router-link
+                :to="{ name: 'single-result', params: { slug: apartment.slug } }"
+                class="text-decoration-none"
+              >
+                <div class="card h-100">
+                  <img
+                    :src="`${imgBaseUrl}/${apartment.img_path}`"
+                    class="card-img-top"
+                    alt="Apartment Image"
+                    v-if="apartment.img_path"
+                  />
+                  <img
+                    src="https://t3.ftcdn.net/jpg/05/52/37/18/360_F_552371867_LkVmqMEChRhMMHDQ2drOS8cwhAWehgVc.png"
+                    alt="Default Image"
+                    v-else
+                  />
 
-                <div class="card-body d-flex flex-column justify-content-start">
-                  <h5 class="card-title">{{ apartment.title }}</h5>
-                  <p class="card-text">{{ apartment.apartment_description }}</p>
-                  <ul class="list-unstyled">
-                    <li>
-                      Letti: {{ apartment.beds }}, Bagni:
-                      {{ apartment.bathroom }}, Stanze: {{ apartment.rooms }}
-                    </li>
-                  </ul>
+                  <div class="card-body d-flex flex-column justify-content-start">
+                    <h5 class="card-title">{{ apartment.title }}</h5>
+                    <p class="card-text">{{ apartment.apartment_description }}</p>
+                    <ul class="list-unstyled">
+                      <li>
+                        Letti: {{ apartment.beds }}, Bagni:
+                        {{ apartment.bathroom }}, Stanze: {{ apartment.rooms }}
+                      </li>
+                    </ul>
 
+                  </div>
                 </div>
-              </div>
-            </router-link>
+              </router-link>
+            </div>
           </div>
         </div>
       </div>
@@ -218,11 +220,42 @@ export default {
   </div>
 </template>
 
+
+
 <style scoped lang="scss">
 @use "../style/general" as *;
 
 .container {
   padding-top: $header-height;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.results-title {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 900;
+    font-size: 3rem;
+    color: #7EBC89;
+  }
+
+.results {
+  margin-top: 3rem; 
+}
+
+.no-results {
+  text-align: center;
+  margin-top: 5em; 
+}
+
+.no-results h3 {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #ccc;
+}
+
+.no-results i {
+  color: #ccc;
 }
 
 .card {
@@ -276,6 +309,7 @@ export default {
   }
   
 }
+
 .ms_btn {
         background-color: $orange;
         color: $white;
