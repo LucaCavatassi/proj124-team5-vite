@@ -20,23 +20,46 @@ export default {
         };
     },
     methods: {
+        validateForm() {
+            this.errors = {};
+            if (!this.form.name) {
+                this.errors.name = ["Il nome è obbligatorio."];
+            }
+            if (!this.form.mail) {
+                this.errors.mail = ["La mail è obbligatoria."];
+            } else if (!this.validEmail(this.form.mail)) {
+                this.errors.mail = ["Inserisci una mail valida."];
+            }
+            if (!this.form.message) {
+                this.errors.message = ["Il messaggio è obbligatorio."];
+            } else if (this.form.message.length > 500) {
+                this.errors.message = ["Il messaggio non può superare i 500 caratteri."];
+            }
+            return Object.keys(this.errors).length === 0;
+        },
+        validEmail(email) {
+            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@(([^<>()[\]\.,;:\s@"]+\.)+[^<>()[\]\.,;:\s@"]{2,})$/i;
+            return re.test(email);
+        },
         sendForm() {
-            this.isLoading = true;
-            axios
-                .post("http://127.0.0.1:8000/api/leads", this.form)
-                .then((resp) => {
-                    console.log(resp);
-                    if (resp.data.success) {
-                        this.contactSend = true;
-                        this.clearFields();
-                    }
-                })
-                .catch((err) => {
-                    console.log('There was an error sending the message:', err);
-                })
-                .finally(() => {
-                    this.isLoading = false;
-                });
+            if (this.validateForm()) {
+                this.isLoading = true;
+                axios
+                    .post("http://127.0.0.1:8000/api/leads", this.form)
+                    .then((resp) => {
+                        console.log(resp);
+                        if (resp.data.success) {
+                            this.contactSend = true;
+                            this.clearFields();
+                        }
+                    })
+                    .catch((err) => {
+                        console.log('There was an error sending the message:', err);
+                    })
+                    .finally(() => {
+                        this.isLoading = false;
+                    });
+            }
         },
         clearFields() {
             this.form.name = "";
@@ -47,10 +70,11 @@ export default {
 };
 </script>
 
+
 <template>
     <div class="container mt-5">
-        <div class="row">
-            <div class="col-12 col-md-8 offset-md-2">
+        <div class="row justify-content-center">
+            <div class="col-md-10 col-lg-8">
                 <h1>Contattaci!</h1>
                 <div class="alert alert-success" v-if="contactSend">
                     Il tuo messaggio è stato inviato con successo
@@ -70,7 +94,7 @@ export default {
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="mail" class="form-label">Mail <span class="text-danger">*</span></label>
-                                <input type="mail" class="form-control" :class="{ 'is-invalid': errors.mail }" id="mail" v-model="form.mail" placeholder="Inserisci la tua mail" />
+                                <input type="email" class="form-control" :class="{ 'is-invalid': errors.mail }" id="mail" v-model="form.mail" placeholder="Inserisci la tua mail" />
                                 <div class="invalid-feedback" v-if="errors.mail">
                                     {{ errors.mail[0] }}
                                 </div>
@@ -79,9 +103,12 @@ export default {
                     </div>
                     <div class="mb-3">
                         <label for="message" class="form-label">Messaggio <span class="text-danger">*</span></label>
-                        <textarea class="form-control" :class="{ 'is-invalid': errors.message }" id="message" v-model="form.message" placeholder="Inserisci il tuo messaggio"></textarea>
+                        <textarea class="form-control" :class="{ 'is-invalid': errors.message }" id="message" v-model="form.message" placeholder="Inserisci il tuo messaggio" maxlength="500"></textarea>
                         <div class="invalid-feedback" v-if="errors.message">
                             {{ errors.message[0] }}
+                        </div>
+                        <div class="text-end">
+                            <small>{{ form.message.length }}/500</small>
                         </div>
                     </div>
 
