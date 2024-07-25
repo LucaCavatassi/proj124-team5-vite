@@ -139,76 +139,82 @@ export default {
       <!-- FILTERS -->
       <div class="row align-items-center ms-search justify-content-between py-2 mt-3">
         <div class="col-lg-2 col-md-6 col-sm-12 d-flex flex-column">
-            <label class="text-center" for="beds">Letti</label>
-            <input placeholder="0" class="ms-column text-center" id="beds" type="number"
-                v-model="tempFilters.beds" />
+          <label class="text-center" for="beds">Letti</label>
+          <input
+            placeholder="0"
+            class="ms-column text-center"
+            id="beds"
+            type="number"
+            v-model="tempFilters.beds"
+          />
         </div>
 
         <div class="col-lg-2 col-md-6 col-sm-12 d-flex flex-column">
-            <label class="text-center" for="bathroom">Bagni</label>
-            <input placeholder="0" class="ms-column text-center" id="bathroom" type="number"
-                v-model="tempFilters.bathroom" />
+          <label class="text-center" for="bathroom">Bagni</label>
+          <input
+            placeholder="0"
+            class="ms-column text-center"
+            id="bathroom"
+            type="number"
+            v-model="tempFilters.bathroom"
+          />
         </div>
 
         <div class="col-lg-2 col-md-6 col-sm-12 d-flex flex-column">
-            <label class="text-center" for="rooms">Stanze</label>
-            <input placeholder="0" class="ms-column text-center" id="rooms" type="number"
-                v-model="tempFilters.rooms" />
+          <label class="text-center" for="rooms">Stanze</label>
+          <input
+            placeholder="0"
+            class="ms-column text-center"
+            id="rooms"
+            type="number"
+            v-model="tempFilters.rooms"
+          />
         </div>
 
         <div class="col-lg-2 col-md-6 col-sm-12 d-flex flex-column">
-            <label class="text-center" for="radius">Raggio di ricerca</label>
-            <input placeholder="0" class="ms-column text-center" id="radius" type="number"
-                v-model="tempFilters.radius" />
+          <label class="text-center" for="radius">Raggio di ricerca</label>
+          <input
+            placeholder="0"
+            class="ms-column text-center"
+            id="radius"
+            type="number"
+            v-model="tempFilters.radius"
+          />
         </div>
 
         <div class="col-lg-2 col-md-12 col-sm-12 d-flex justify-content-center">
-            <button class=" search-btn" @click="applyFilters"><i
-                    class="fa-solid fa-magnifying-glass"></i></button>
+          <button class="search-btn" @click="applyFilters">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
         </div>
-    </div>
+      </div>
 
       <!-- RESULTS -->
       <div class="results mt-4">
         <h1 class="results-title text-center">Ecco cosa abbiamo trovato per te:</h1>
-        <div v-if="filteredApartments.length === 0" class="no-results d-flex flex-column align-items-center justify-content-center">
-          <i class="fa-solid fa-magnifying-glass fa-3x mb-3"></i>
+        <div
+          v-if="filteredApartments.length === 0"
+          class="no-results d-flex flex-column align-items-center justify-content-center"
+        >
+          <i class="fas fa-search fa-3x mb-3 animated-magnifying-glass"></i>
           <h3 class="text-center">"La ricerca non ha prodotto risultati."</h3>
         </div>
         <div v-else>
           <div class="row row-cols-lg-3 row-cols-2 g-4 mt-3">
-            <div
-              class="col"
-              v-for="apartment in filteredApartments"
-              :key="apartment"
-            >
-              <router-link
-                :to="{ name: 'single-result', params: { slug: apartment.slug } }"
-                class="text-decoration-none"
-              >
+            <div class="col" v-for="apartment in filteredApartments" :key="apartment">
+              <router-link :to="{ name: 'single-result', params: { slug: apartment.slug } }" class="text-decoration-none">
                 <div class="card h-100">
-                  <img
-                    :src="`${imgBaseUrl}/${apartment.img_path}`"
-                    class="card-img-top"
-                    alt="Apartment Image"
-                    v-if="apartment.img_path"
-                  />
-                  <img
-                    src="https://t3.ftcdn.net/jpg/05/52/37/18/360_F_552371867_LkVmqMEChRhMMHDQ2drOS8cwhAWehgVc.png"
-                    alt="Default Image"
-                    v-else
-                  />
+                  <img :src="`${imgBaseUrl}/${apartment.img_path}`" class="card-img-top" alt="Apartment Image" v-if="apartment.img_path" />
+                  <img src="https://t3.ftcdn.net/jpg/05/52/37/18/360_F_552371867_LkVmqMEChRhMMHDQ2drOS8cwhAWehgVc.png" alt="Default Image" v-else />
 
                   <div class="card-body d-flex flex-column justify-content-start">
                     <h5 class="card-title">{{ apartment.title }}</h5>
                     <p class="card-text">{{ apartment.apartment_description }}</p>
                     <ul class="list-unstyled">
                       <li>
-                        Letti: {{ apartment.beds }}, Bagni:
-                        {{ apartment.bathroom }}, Stanze: {{ apartment.rooms }}
+                        Letti: {{ apartment.beds }}, Bagni: {{ apartment.bathroom }}, Stanze: {{ apartment.rooms }}
                       </li>
                     </ul>
-
                   </div>
                 </div>
               </router-link>
@@ -355,4 +361,21 @@ export default {
         -webkit-appearance: none;
         margin: 0;
     }
+    
+    @keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-30px);
+  }
+  60% {
+    transform: translateY(-15px);
+  }
+}
+
+.animated-magnifying-glass {
+  animation: bounce 2s infinite;
+  color: #ccc;
+}
 </style>
