@@ -234,9 +234,9 @@ export default {
 
 .results-title {
     font-family: 'Rubik', sans-serif;
-    font-weight: 900;
+    font-weight: 500;
     font-size: 3rem;
-    color: #7EBC89;
+    color: #606361;
   }
 
 .results {
