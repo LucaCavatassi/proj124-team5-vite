@@ -39,7 +39,9 @@
 
 			viewRegister() {
 				axios.post("http://127.0.0.1:8000/api/view", {
-					apartment_id: this.apartment.id
+					apartment_id: this.apartment.id,
+					user_id: this.apartment.user_id,
+					title: this.apartment.title
 				})
 				.then((response) => {
 					console.log('Visita registrata');
