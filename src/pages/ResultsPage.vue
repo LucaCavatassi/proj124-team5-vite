@@ -166,13 +166,13 @@ export default {
             <button class=" search-btn" @click="applyFilters"><i
                     class="fa-solid fa-magnifying-glass"></i></button>
         </div>
-      </div>
+    </div>
 
       <!-- RESULTS -->
       <div class="results mt-4">
         <h1 class="results-title text-center">Ecco cosa abbiamo trovato per te:</h1>
         <div v-if="filteredApartments.length === 0" class="no-results d-flex flex-column align-items-center justify-content-center">
-          <img src="@/assets/no_result.gif" alt="No results" class="no-results-gif mb-3" />
+          <i class="fa-solid fa-magnifying-glass fa-3x mb-3"></i>
           <h3 class="text-center">"La ricerca non ha prodotto risultati."</h3>
         </div>
         <div v-else>
@@ -221,6 +221,7 @@ export default {
 </template>
 
 
+
 <style scoped lang="scss">
 @use "../style/general" as *;
 
@@ -233,15 +234,14 @@ export default {
 
 .results-title {
     font-family: 'Rubik', sans-serif;
-    font-weight: 900;
+    font-weight: 500;
     font-size: 3rem;
-    color: #7EBC89;
+    color: #606361;
   }
 
 .results {
   margin-top: 3rem; 
 }
-
 
 .no-results {
   text-align: center;
@@ -254,10 +254,10 @@ export default {
   color: #ccc;
 }
 
-.no-results .no-results-gif {
-  width: 150px; 
-  height: auto; 
+.no-results i {
+  color: #ccc;
 }
+
 .card {
   border: 1px solid #ddd;
   border-radius: 10px;
