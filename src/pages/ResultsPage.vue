@@ -80,7 +80,7 @@ export default {
     applyFilters() {
       this.filters = { ...this.tempFilters };
       localStorage.setItem("filters", JSON.stringify(this.filters));
-      this.fetchResults(this.query); 
+      this.fetchResults(this.query);
     },
 
     loadFilters() {
@@ -137,61 +137,75 @@ export default {
 
     <div v-else class="flex-grow-1">
       <!-- FILTERS -->
-      <div class="row align-items-center ms-search justify-content-between py-2 mt-3">
-        <div class="col-lg-2 col-md-6 col-sm-12 d-flex flex-column">
+
+      <form
+        @submit.prevent="applyFilters"
+        class="row align-items-center ms-search justify-content-between py-2 mt-3"
+      >
+        <div class="col-lg-2 col-md-6 col-sm-12 d-flex flex-column fw-bold">
           <label class="text-center" for="beds">Letti</label>
           <input
             placeholder="0"
-            class="ms-column text-center"
+            class="ms-column text-center border border-0"
             id="beds"
             type="number"
             v-model="tempFilters.beds"
+            @keydown.enter.prevent="applyFilters"
+            autocomplete="off"
           />
         </div>
 
-        <div class="col-lg-2 col-md-6 col-sm-12 d-flex flex-column">
+        <div class="col-lg-2 col-md-6 col-sm-12 d-flex flex-column fw-bold">
           <label class="text-center" for="bathroom">Bagni</label>
           <input
             placeholder="0"
-            class="ms-column text-center"
+            class="ms-column text-center border border-0"
             id="bathroom"
             type="number"
             v-model="tempFilters.bathroom"
+            @keydown.enter.prevent="applyFilters"
+            autocomplete="off"
           />
         </div>
 
-        <div class="col-lg-2 col-md-6 col-sm-12 d-flex flex-column">
+        <div class="col-lg-2 col-md-6 col-sm-12 d-flex flex-column fw-bold">
           <label class="text-center" for="rooms">Stanze</label>
           <input
             placeholder="0"
-            class="ms-column text-center"
+            class="ms-column text-center border border-0"
             id="rooms"
             type="number"
             v-model="tempFilters.rooms"
+            @keydown.enter.prevent="applyFilters"
+            autocomplete="off"
           />
         </div>
 
-        <div class="col-lg-2 col-md-6 col-sm-12 d-flex flex-column">
+        <div class="col-lg-2 col-md-6 col-sm-12 d-flex flex-column fw-bold">
           <label class="text-center" for="radius">Raggio di ricerca</label>
           <input
             placeholder="0"
-            class="ms-column text-center"
+            class="ms-column text-center border border-0"
             id="radius"
             type="number"
             v-model="tempFilters.radius"
+            @keydown.enter.prevent="applyFilters"
+            autocomplete="off"
           />
         </div>
 
         <div class="col-lg-2 col-md-12 col-sm-12 d-flex justify-content-center">
-          <button class="search-btn" @click="applyFilters">
+          <button type="submit" class="search-btn">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
         </div>
-      </div>
+      </form>
 
       <!-- RESULTS -->
       <div class="results mt-4">
-        <h1 class="results-title text-center">Ecco cosa abbiamo trovato per te:</h1>
+        <h1 class="results-title text-center">
+          Ecco cosa abbiamo trovato per te:
+        </h1>
         <div
           v-if="filteredApartments.length === 0"
           class="no-results d-flex flex-column align-items-center justify-content-center"
@@ -201,18 +215,42 @@ export default {
         </div>
         <div v-else>
           <div class="row row-cols-lg-3 row-cols-2 g-4 mt-3">
-            <div class="col" v-for="apartment in filteredApartments" :key="apartment">
-              <router-link :to="{ name: 'single-result', params: { slug: apartment.slug } }" class="text-decoration-none">
+            <div
+              class="col"
+              v-for="apartment in filteredApartments"
+              :key="apartment"
+            >
+              <router-link
+                :to="{
+                  name: 'single-result',
+                  params: { slug: apartment.slug },
+                }"
+                class="text-decoration-none"
+              >
                 <div class="card h-100">
-                  <img :src="`${imgBaseUrl}/${apartment.img_path}`" class="card-img-top" alt="Apartment Image" v-if="apartment.img_path" />
-                  <img src="https://t3.ftcdn.net/jpg/05/52/37/18/360_F_552371867_LkVmqMEChRhMMHDQ2drOS8cwhAWehgVc.png" alt="Default Image" v-else />
+                  <img
+                    :src="`${imgBaseUrl}/${apartment.img_path}`"
+                    class="card-img-top"
+                    alt="Apartment Image"
+                    v-if="apartment.img_path"
+                  />
+                  <img
+                    src="https://t3.ftcdn.net/jpg/05/52/37/18/360_F_552371867_LkVmqMEChRhMMHDQ2drOS8cwhAWehgVc.png"
+                    alt="Default Image"
+                    v-else
+                  />
 
-                  <div class="card-body d-flex flex-column justify-content-start">
+                  <div
+                    class="card-body d-flex flex-column justify-content-start"
+                  >
                     <h5 class="card-title">{{ apartment.title }}</h5>
-                    <p class="card-text">{{ apartment.apartment_description }}</p>
+                    <p class="card-text">
+                      {{ apartment.apartment_description }}
+                    </p>
                     <ul class="list-unstyled">
                       <li>
-                        Letti: {{ apartment.beds }}, Bagni: {{ apartment.bathroom }}, Stanze: {{ apartment.rooms }}
+                        Letti: {{ apartment.beds }}, Bagni:
+                        {{ apartment.bathroom }}, Stanze: {{ apartment.rooms }}
                       </li>
                     </ul>
                   </div>
@@ -226,8 +264,6 @@ export default {
   </div>
 </template>
 
-
-
 <style scoped lang="scss">
 @use "../style/general" as *;
 
@@ -239,19 +275,19 @@ export default {
 }
 
 .results-title {
-    font-family: 'Rubik', sans-serif;
-    font-weight: 500;
-    font-size: 3rem;
-    color: #606361;
-  }
+  font-family: "Rubik", sans-serif;
+  font-weight: 500;
+  font-size: 3rem;
+  color: #606361;
+}
 
 .results {
-  margin-top: 3rem; 
+  margin-top: 3rem;
 }
 
 .no-results {
   text-align: center;
-  margin-top: 5em; 
+  margin-top: 5em;
 }
 
 .no-results h3 {
@@ -313,57 +349,59 @@ export default {
     background-color: #fb7a4f;
     color: $white;
   }
-  
 }
 
 .ms_btn {
-        background-color: $orange;
-        color: $white;
-    }
+  background-color: $orange;
+  color: $white;
+}
 
-    .ms_btn:hover {
-        background-color: #fb7a4f;
-        color: $white;
-    }
+.ms_btn:hover {
+  background-color: #fb7a4f;
+  color: $white;
+}
 
-    .ms-search {
-        border: 1px solid lightgray;
-        border-radius: 40px;
-    }
+.ms-search {
+  border: 1px solid lightgray;
+  border-radius: 40px;
+}
 
-    .search-btn {
-        border: none;
-        background-color: #fb7a4f;
-        border-radius: 50%;
-        font-size: 20px;
-        width: 60px;
-        height: 60px;
-        padding: 10px;
-        color: white;
-        line-height: 10px;
-    }
+.search-btn {
+  border: none;
+  background-color: #fb7a4f;
+  border-radius: 50%;
+  font-size: 20px;
+  width: 60px;
+  height: 60px;
+  padding: 10px;
+  color: white;
+  line-height: 10px;
+}
 
-    .ms-column {
-        border: none;
-        border-right: 1px solid lightgray;
-    }
+.ms-column {
+  border: none;
+  border-right: 1px solid lightgray;
+}
 
-    .ms-column:active,
-    .ms-column:focus {
-        outline: none;
-        background-color: white;
-        border: none;
+.ms-column:active,
+.ms-column:focus {
+  outline: none;
+  background-color: white;
+  border: none;
+}
 
-    }
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
-    input::-webkit-inner-spin-button,
-    input::-webkit-outer-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-    
-    @keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
     transform: translateY(0);
   }
   40% {
