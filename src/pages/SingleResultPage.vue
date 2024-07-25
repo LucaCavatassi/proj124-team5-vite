@@ -16,13 +16,17 @@
 		created() {
 			this.fetchApartmentDetails();
 		},
+		mounted() {
+			this.viewRegister();
+			console.log(this.apartment.id);
+		},
 		methods: {
 			fetchApartmentDetails() {
 				axios
 					.get(`http://127.0.0.1:8000/api/apartment/${this.slug}/apartment-details`)
 					.then((response) => {
 						this.apartment = response.data;
-						console.log(this.apartment);
+						// console.log(this.apartment);
 					})
 					.catch((error) => {
 						console.error("Errore nel prendere i dati:", error);
@@ -30,8 +34,22 @@
 			},
 
 			goBackToResults() {
-			this.$router.push({ name: "SearchResults", query: { q: this.$route.query.q } });
-		},
+				this.$router.push({ name: "SearchResults", query: { q: this.$route.query.q } });
+			},
+
+			viewRegister() {
+				axios.post("http://127.0.0.1:8000/api/view", {
+					apartment_id: this.apartment.id,
+					user_id: this.apartment.user_id,
+					title: this.apartment.title
+				})
+				.then((response) => {
+					console.log('Visita registrata');
+				})
+				.catch((error) => {
+					console.log('errore nella registrazione', error);
+				})
+			},
 		},
 	};
 </script>
