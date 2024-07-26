@@ -45,6 +45,10 @@
             a {
                 color: inherit
             }
+
+            a:hover{
+                color: $orange;
+            }
         }
     }
 
