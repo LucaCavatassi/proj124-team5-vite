@@ -143,8 +143,8 @@
 	@use "../style/partials/palette" as *;
 
 	.card {
-		border-color: $green;
 		height: 100%;
+		box-shadow: 5px 10px 18px #FE5D26;
 	}
 
 	.ms_btn {

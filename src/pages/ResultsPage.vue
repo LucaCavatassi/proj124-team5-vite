@@ -184,7 +184,7 @@ export default {
         <div class="col-lg-2 col-md-6 col-sm-12 d-flex flex-column fw-bold">
           <label class="text-center" for="radius">Raggio di ricerca</label>
           <input
-            placeholder="0"
+            placeholder="20"
             class="ms-column text-center border border-0"
             id="radius"
             type="number"
@@ -415,5 +415,9 @@ input::-webkit-outer-spin-button {
 .animated-magnifying-glass {
   animation: bounce 2s infinite;
   color: #ccc;
+}
+
+input:focus::placeholder {
+  color: transparent;
 }
 </style>
