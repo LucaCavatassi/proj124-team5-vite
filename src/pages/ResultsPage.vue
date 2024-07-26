@@ -221,9 +221,9 @@ export default {
           <h3 class="text-center">"La ricerca non ha prodotto risultati."</h3>
         </div>
         <div v-else>
-          <div class="row row-cols-lg-3 row-cols-2 g-4 mt-3">
+          <div class="row g-4 mt-3">
             <div
-              class="col"
+              class="col-12 col-sm-6 col-md-4 col-lg-3"
               v-for="apartment in filteredApartments"
               :key="apartment"
             >
