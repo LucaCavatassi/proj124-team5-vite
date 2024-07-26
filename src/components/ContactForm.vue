@@ -103,7 +103,7 @@ export default {
                     </div>
                     <div class="mb-3">
                         <label for="message" class="form-label">Messaggio <span class="text-danger">*</span></label>
-                        <textarea class="form-control" :class="{ 'is-invalid': errors.message }" id="message" v-model="form.message" placeholder="Inserisci il tuo messaggio" maxlength="500"></textarea>
+                        <textarea class="form-control" :class="{ 'is-invalid': errors.message }" id="message" v-model="form.message" placeholder="Ciao, mi interessa il tuo appartamento.." maxlength="500"></textarea>
                         <div class="invalid-feedback" v-if="errors.message">
                             {{ errors.message[0] }}
                         </div>
