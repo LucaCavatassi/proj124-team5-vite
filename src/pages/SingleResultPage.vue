@@ -60,7 +60,7 @@
 			<div class="row justify-content-center mt-3">
 				<div class="col-md-10 col-lg-8">
 					<div class="d-flex justify-content-end button-container">
-						<button @click="goBackToResults" class="btn my-button ms_btn btn-primary">ricerca</button>
+						<button @click="goBackToResults" class="btn my-button ms_btn btn-primary">Torna indietro</button>
 					</div>
 
 					<h1 class="fw-bold">{{ apartment.title }}</h1>
