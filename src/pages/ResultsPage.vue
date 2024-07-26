@@ -68,7 +68,14 @@ export default {
           },
         })
         .then((response) => {
-          this.store.searchResults = response.data;
+          let sortedResults = response.data.sort((a, b) => {
+            let idA = a.sponsorship_id || 0;
+            let idB = b.sponsorship_id || 0;
+            return idB - idA;
+          });
+          this.store.searchResults = sortedResults;
+          console.log(this.store.searchResults);
+
           this.isLoading = false;
         })
         .catch((error) => {
