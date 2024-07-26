@@ -19,7 +19,13 @@ export default {
             errors: {},
         };
     },
+
     methods: {
+        deleteAlert() {
+                setTimeout(() => {
+                this.contactSend = false;
+            }, 5000); 
+        },
         validateForm() {
             this.errors = {};
             if (!this.form.name) {
@@ -76,7 +82,7 @@ export default {
         <div class="row justify-content-center">
             <div class="col-md-10 col-lg-8">
                 <h1>Contattaci!</h1>
-                <div class="alert alert-success" v-if="contactSend">
+                <div id="success" class="alert alert-success" v-if="contactSend">
                     Il tuo messaggio è stato inviato con successo
                 </div>
                 <form>
@@ -112,7 +118,7 @@ export default {
                         </div>
                     </div>
 
-                    <button @click.prevent="sendForm" type="submit" class="btn ms_btn" :disabled="isLoading">
+                    <button @click.prevent="sendForm(), deleteAlert()" type="submit" class="btn ms_btn" :disabled="isLoading">
                         <span class="text-white" v-if="!isLoading"> Invia </span>
                         <div v-else class="spinner-border" role="status">
                             <span class="visually-hidden">Loading...</span>
