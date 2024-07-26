@@ -5,7 +5,7 @@
     <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
         <div class="container-fluid">
             <router-link class="w-50" :to="{ name: 'home' }">
-                <img src="/src/assets/boolbnb_logo.png" alt="Logo" class="align-text-top">
+                <img src="/src/assets/boolbnb_logo.png" alt="Logo" class="align-text-top logo">
             </router-link>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -28,16 +28,14 @@
 
 <style scoped lang="scss">
     @use "../style/partials/palette" as *;
-    
+
     nav {
         min-height: 60px;
     }
 
-
     .container-fluid {
-        
-        img {
-            width: 30%;
+        img.logo {
+            width: 50%; // Larger size for mobile and tablet
         }
         li {
             text-decoration: none;
@@ -45,14 +43,26 @@
 
         .router-link-active {
             color: $orange;
-            
         }
-    };
+    }
+
+    @media screen and (min-width: 768px) {
+        .container-fluid {
+            img.logo {
+                width: 30%; // Adjust size for tablet
+            }
+        }
+    }
 
     @media screen and (min-width: 1024px) {
-    nav {
-        min-height: 80px;
-        max-height: 80px;
+        nav {
+            min-height: 80px;
+            max-height: 80px;
+        }
+        .container-fluid {
+            img.logo {
+                width: 30%; // Adjust size for desktop
+            }
         }
     }
 </style>
