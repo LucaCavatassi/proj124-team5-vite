@@ -78,6 +78,7 @@
 							<ul>
 								<li>Bagni: {{ apartment.bathroom }}</li>
 								<li>Camere da letto: {{ apartment.beds }}</li>
+								<li>Stanze: {{ apartment.rooms }}</li>
 								<li>Dimensione: {{ apartment.square_mt }} m²</li>
 							</ul>
 						</div>
