@@ -250,7 +250,12 @@ export default {
                   <div
                     class="card-body d-flex flex-column justify-content-start"
                   >
+                  <div>
+
+                    <span v-if="apartment.sponsorship_id >= 2" class="badge rounded-pill text-bg-primary">Consigliato per te</span>
+                  </div>
                     <h5 class="card-title">{{ apartment.title }}</h5>
+
                     <p class="card-text">
                       {{ apartment.apartment_description }}
                     </p>
@@ -324,10 +329,22 @@ export default {
     min-height: 300px;
     object-fit: cover;
     object-position: center;
+    position: relative;
   }
 
   .card-body {
     padding: 15px;
+    // position: relative;
+  }
+
+  .badge{
+    position: absolute;
+    background-color: #FE5D26 !important;
+    padding: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); 
+    top: 20px;
+    left: 20px;
+
   }
 
   .card-title {
