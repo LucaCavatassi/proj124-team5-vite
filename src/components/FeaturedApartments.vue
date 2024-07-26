@@ -123,7 +123,7 @@
 				<div class="row">
 					<div class="col-12 py-5" v-for="featured in this.allFeatured">
 						<div class="card">
-							<img src="https://www.apartments.com/blog/sites/default/files/styles/x_large_hq/public/image/2023-06/ParkLine-apartment-in-Miami-FL.jpg?itok=kQmw64UU"
+							<img :src="`${imgBaseUrl}/${featured.img_path}`"
 								class="card-img-top" alt="" />
 							<div class="card-body">
 								<h5 class="card-title">{{ featured.title }}</h5>
