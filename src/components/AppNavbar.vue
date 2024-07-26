@@ -35,7 +35,7 @@
 
     .container-fluid {
         img.logo {
-            width: 50%; // Larger size for mobile and tablet
+            width: 70%;
         }
         li {
             text-decoration: none;
@@ -49,7 +49,7 @@
     @media screen and (min-width: 768px) {
         .container-fluid {
             img.logo {
-                width: 30%; // Adjust size for tablet
+                width: 30%;
             }
         }
     }
@@ -61,7 +61,7 @@
         }
         .container-fluid {
             img.logo {
-                width: 30%; // Adjust size for desktop
+                width: 30%; 
             }
         }
     }
