@@ -13,6 +13,7 @@
 				screenSize: "large",
 				store,
 				slug: null,
+				imgBaseUrl: "http://127.0.0.1:8000/storage",
 			};
 		},
 		created() {
@@ -104,7 +105,7 @@
 				<div class="row">
 					<div class="col-4 py-5" v-for="featured in this.paginatedFeatured">
 						<div class="card">
-							<img src="https://www.apartments.com/blog/sites/default/files/styles/x_large_hq/public/image/2023-06/ParkLine-apartment-in-Miami-FL.jpg?itok=kQmw64UU"
+							<img :src="`${imgBaseUrl}/${featured.img_path}`"
 								class="card-img-top" alt="" />
 							<div class="card-body">
 								<h5 class="card-title">{{ featured.title }}</h5>
@@ -144,7 +145,6 @@
 
 	.card {
 		height: 100%;
-		box-shadow: 5px 10px 18px #FE5D26;
 	}
 
 	.ms_btn {
