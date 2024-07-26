@@ -56,13 +56,12 @@
 <template>
 	<div class="container mt-6">
 
-		<div class="d-flex justify-content-end button-container">
-			<button @click="goBackToResults" class="btn my-button ms_btn btn-primary">Torna ai risultati di
-				ricerca</button>
-		</div>
 		<div v-if="apartment">
-			<div class="row justify-content-center">
+			<div class="row justify-content-center mt-3">
 				<div class="col-md-10 col-lg-8">
+					<div class="d-flex justify-content-end button-container">
+						<button @click="goBackToResults" class="btn my-button ms_btn btn-primary">ricerca</button>
+					</div>
 
 					<h1 class="fw-bold">{{ apartment.title }}</h1>
 					<p>{{ apartment.address }}</p>
@@ -73,20 +72,24 @@
 						alt="Default Image" v-else />
 					<h3>Descrizione:</h3>
 					<p>{{ apartment.apartment_description }}</p>
-				</div>
-				<div class="col-md-10 col-lg-8 mt-4">
-					<h5>Caratteristiche</h5>
-					<ul>
-						<li>Bagni: {{ apartment.bathroom }}</li>
-						<li>Camere da letto: {{ apartment.beds }}</li>
-						<li>Dimensione: {{ apartment.square_mt }} m²</li>
-					</ul>
-					<h5>Servizi</h5>
-					<ul>
-						<li v-for="(service, index) in apartment.services" :key="index">
-							{{ service.title }}
-						</li>
-					</ul>
+					<div class="row mt-4">
+						<div class="col-sm-12 col-md-6 col-lg-6">
+							<h5>Caratteristiche</h5>
+							<ul>
+								<li>Bagni: {{ apartment.bathroom }}</li>
+								<li>Camere da letto: {{ apartment.beds }}</li>
+								<li>Dimensione: {{ apartment.square_mt }} m²</li>
+							</ul>
+						</div>
+						<div class="col-sm-12 col-md-6 col-lg-6">
+							<h5>Servizi</h5>
+							<ul>
+								<li v-for="(service, index) in apartment.services" :key="index">
+									{{ service.title }}
+								</li>
+							</ul>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
