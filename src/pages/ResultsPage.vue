@@ -143,68 +143,76 @@ export default {
     </div>
 
     <div v-else class="flex-grow-1">
+
       <!-- FILTERS -->
-
-      <form
-        @submit.prevent="applyFilters"
-        class="row align-items-center ms-search justify-content-between py-2 mt-3"
-      >
-        <div class="col-lg-2 col-md-6 col-sm-12 d-flex flex-column fw-bold">
-          <label class="text-center" for="beds">Letti</label>
-          <input
-            placeholder="0"
-            class="ms-column text-center border border-0"
-            id="beds"
-            type="number"
-            v-model="tempFilters.beds"
-            @keydown.enter.prevent="applyFilters"
-            autocomplete="off"
-          />
+      <form @submit.prevent="applyFilters"
+        class="row align-items-center ms-search justify-content-between py-2 mt-3 d-none d-md-flex">
+        <div class="col-lg-2 col-md-6 col-sm-12 d-flex flex-column fw-bold text-center">
+          <label class="form-label" for="beds">Letti</label>
+          <input placeholder="0" class="form-control text-center border border-0" id="beds" type="number"
+            v-model="tempFilters.beds" @keydown.enter.prevent="applyFilters" autocomplete="off" />
         </div>
 
-        <div class="col-lg-2 col-md-6 col-sm-12 d-flex flex-column fw-bold">
-          <label class="text-center" for="bathroom">Bagni</label>
-          <input
-            placeholder="0"
-            class="ms-column text-center border border-0"
-            id="bathroom"
-            type="number"
-            v-model="tempFilters.bathroom"
-            @keydown.enter.prevent="applyFilters"
-            autocomplete="off"
-          />
+        <div class="col-lg-2 col-md-6 col-sm-12 d-flex flex-column fw-bold text-center">
+          <label class="form-label" for="bathroom">Bagni</label>
+          <input placeholder="0" class="form-control text-center border border-0" id="bathroom" type="number"
+            v-model="tempFilters.bathroom" @keydown.enter.prevent="applyFilters" autocomplete="off" />
         </div>
 
-        <div class="col-lg-2 col-md-6 col-sm-12 d-flex flex-column fw-bold">
-          <label class="text-center" for="rooms">Stanze</label>
-          <input
-            placeholder="0"
-            class="ms-column text-center border border-0"
-            id="rooms"
-            type="number"
-            v-model="tempFilters.rooms"
-            @keydown.enter.prevent="applyFilters"
-            autocomplete="off"
-          />
+        <div class="col-lg-2 col-md-6 col-sm-12 d-flex flex-column fw-bold text-center">
+          <label class="form-label" for="rooms">Stanze</label>
+          <input placeholder="0" class="form-control text-center border border-0" id="rooms" type="number"
+            v-model="tempFilters.rooms" @keydown.enter.prevent="applyFilters" autocomplete="off" />
         </div>
 
-        <div class="col-lg-2 col-md-6 col-sm-12 d-flex flex-column fw-bold">
-          <label class="text-center" for="radius">Raggio di ricerca</label>
-          <input
-            placeholder="20"
-            class="ms-column text-center border border-0"
-            id="radius"
-            type="number"
-            v-model="tempFilters.radius"
-            @keydown.enter.prevent="applyFilters"
-            autocomplete="off"
-          />
+        <div class="col-lg-2 col-md-6 col-sm-12 d-flex flex-column fw-bold text-center">
+          <label class="form-label" for="radius">Raggio di ricerca</label>
+          <input placeholder="20" class="form-control text-center border border-0" id="radius" type="number"
+            v-model="tempFilters.radius" @keydown.enter.prevent="applyFilters" autocomplete="off" />
         </div>
 
         <div class="col-lg-2 col-md-12 col-sm-12 d-flex justify-content-center">
-          <button type="submit" class="search-btn">
+          <button type="submit" class="btn btn-primary search-btn">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
+        </div>
+      </form>
+
+
+      <!-- ADVANCE FILTERS SMARTPHONE -->
+      <form @submit.prevent="applyFilters" class="row align-items-center justify-content-between py-2 mt-3 d-md-none">
+        <p class="d-inline-flex gap-1 w-100">
+          <button class="btn btn-primary w-100 ms-orange-btn" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            Filtri ricerca
+          </button>
+        </p>
+        <div class="collapse w-100" id="collapseExample">
+          <div class="card card-body">
+            <div class="mb-3">
+              <label class="form-label" for="beds">Letti</label>
+              <input class="form-control" id="beds" type="number" v-model="tempFilters.beds"
+                @keydown.enter.prevent="applyFilters" autocomplete="off" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="bathroom">Bagni</label>
+              <input class="form-control" id="bathroom" type="number" v-model="tempFilters.bathroom"
+                @keydown.enter.prevent="applyFilters" autocomplete="off" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="rooms">Stanze</label>
+              <input class="form-control" id="rooms" type="number" v-model="tempFilters.rooms"
+                @keydown.enter.prevent="applyFilters" autocomplete="off" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="radius">Distanza</label>
+              <input class="form-control" id="radius" type="number" v-model="tempFilters.radius"
+                @keydown.enter.prevent="applyFilters" autocomplete="off" />
+            </div>
+            <div class="d-flex justify-content-end">
+              <button type="submit" class="btn btn-primary ms-orange-btn">Cerca</button>
+            </div>
+          </div>
         </div>
       </form>
 
@@ -213,47 +221,30 @@ export default {
         <h1 class="results-title text-center">
           Ecco cosa abbiamo trovato per te:
         </h1>
-        <div
-          v-if="filteredApartments.length === 0"
-          class="no-results d-flex flex-column align-items-center justify-content-center"
-        >
+        <div v-if="filteredApartments.length === 0"
+          class="no-results d-flex flex-column align-items-center justify-content-center">
           <i class="fas fa-search fa-3x mb-3 animated-magnifying-glass"></i>
           <h3 class="text-center">"La ricerca non ha prodotto risultati."</h3>
         </div>
         <div v-else>
           <div class="row g-4 mt-3">
-            <div
-              class="col-12 col-sm-6 col-md-4 col-lg-3"
-              v-for="apartment in filteredApartments"
-              :key="apartment"
-            >
-              <router-link
-                :to="{
-                  name: 'single-result',
-                  params: { slug: apartment.slug },
-                }"
-                class="text-decoration-none"
-              >
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3" v-for="apartment in filteredApartments" :key="apartment">
+              <router-link :to="{
+                name: 'single-result',
+                params: { slug: apartment.slug },
+              }" class="text-decoration-none">
                 <div class="card h-100">
-                  <img
-                    :src="`${imgBaseUrl}/${apartment.img_path}`"
-                    class="card-img-top"
-                    alt="Apartment Image"
-                    v-if="apartment.img_path"
-                  />
-                  <img
-                    src="https://t3.ftcdn.net/jpg/05/52/37/18/360_F_552371867_LkVmqMEChRhMMHDQ2drOS8cwhAWehgVc.png"
-                    alt="Default Image"
-                    v-else
-                  />
+                  <img :src="`${imgBaseUrl}/${apartment.img_path}`" class="card-img-top" alt="Apartment Image"
+                    v-if="apartment.img_path" />
+                  <img src="https://t3.ftcdn.net/jpg/05/52/37/18/360_F_552371867_LkVmqMEChRhMMHDQ2drOS8cwhAWehgVc.png"
+                    alt="Default Image" v-else />
 
-                  <div
-                    class="card-body d-flex flex-column justify-content-start"
-                  >
-                  <div>
+                  <div class="card-body d-flex flex-column justify-content-start">
+                    <div>
 
-                    <span v-if="apartment.sponsorship_id >= 2" class="badge rounded-pill text-bg-primary">Consigliato per te</span>
-                  </div>
+                      <span v-if="apartment.sponsorship_id >= 2" class="badge rounded-pill text-bg-primary">Consigliato
+                        per te</span>
+                    </div>
                     <h5 class="card-title">{{ apartment.title }}</h5>
 
                     <p class="card-text">
@@ -276,7 +267,7 @@ export default {
   </div>
 </template>
 
-<style scoped lang="scss">
+<!-- <style scoped lang="scss">
 @use "../style/general" as *;
 
 .container {
@@ -312,6 +303,17 @@ export default {
   color: #ccc;
 }
 
+.ms-orange-btn {
+  background-color: #FE5D26;
+  border: none;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: #FE5D26;
+  }
+}
+
 .card {
   border: 1px solid #ddd;
   border-radius: 10px;
@@ -337,14 +339,13 @@ export default {
     // position: relative;
   }
 
-  .badge{
+  .badge {
     position: absolute;
     background-color: #FE5D26 !important;
     padding: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     top: 20px;
     left: 20px;
-
   }
 
   .card-title {
@@ -421,6 +422,7 @@ input::-webkit-outer-spin-button {
 }
 
 @keyframes bounce {
+
   0%,
   20%,
   50%,
@@ -428,9 +430,11 @@ input::-webkit-outer-spin-button {
   100% {
     transform: translateY(0);
   }
+
   40% {
     transform: translateY(-30px);
   }
+
   60% {
     transform: translateY(-15px);
   }
@@ -443,5 +447,245 @@ input::-webkit-outer-spin-button {
 
 input:focus::placeholder {
   color: transparent;
+}
+
+form.collapse .card {
+  margin-top: 10px;
+}
+
+form.collapse .card .form-label {
+  font-weight: bold;
+}
+
+form.collapse .card .form-control {
+  border-radius: 5px;
+}
+
+form.collapse .card .btn-primary {
+  background-color: $orange;
+  border: none;
+}
+
+form.collapse .card .btn-primary:hover {
+  background-color: darken($orange, 10%);
+}
+
+@media (max-width: 768px) {
+  .collapse .card-body {
+    padding: 1rem;
+  }
+
+  .collapse .card-body .form-label {
+    font-size: 1rem;
+  }
+
+  .collapse .card-body .form-control {
+    font-size: 1rem;
+  }
+
+  .collapse .card-body .btn-primary {
+    width: 100%;
+    font-size: 1rem;
+  }
+}
+</style> -->
+<style scoped lang="scss">
+@use "../style/general" as *;
+
+.container {
+  padding-top: $header-height;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.results-title {
+  font-family: "Rubik", sans-serif;
+  font-weight: 500;
+  font-size: 3rem;
+  color: #606361;
+}
+
+.results {
+  margin-top: 3rem;
+}
+
+.no-results {
+  text-align: center;
+  margin-top: 5em;
+}
+
+.no-results h3 {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #ccc;
+}
+
+.no-results i {
+  color: #ccc;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  min-height: 500px;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  .card-img-top {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    min-height: 300px;
+    object-fit: cover;
+    object-position: center;
+    position: relative;
+  }
+
+  .card-body {
+    padding: 15px;
+  }
+
+  .badge {
+    position: absolute;
+    background-color: #FE5D26 !important;
+    padding: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    top: 20px;
+    left: 20px;
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .card-text {
+    font-size: 0.9rem;
+    color: #555;
+  }
+
+  .list-unstyled {
+    padding-left: 0;
+    list-style: none;
+    margin-bottom: 15px;
+  }
+}
+
+.ms_btn {
+  background-color: #FE5D26;
+  color: $white;
+
+  &:hover {
+    background-color: #fb7a4f;
+    color: $white;
+  }
+}
+
+.ms-search {
+  border: 1px solid lightgray;
+  border-radius: 40px;
+  background-color: #f8f9fa;
+  padding: 15px 20px;
+}
+
+.search-btn {
+  border: none;
+  background-color: #FE5D26;
+  border-radius: 50%;
+  font-size: 20px;
+  width: 60px;
+  height: 60px;
+  padding: 10px;
+  color: white;
+  line-height: 10px;
+}
+
+.search-btn:hover {
+  background-color: #fb7a4f;
+  color: white;
+}
+
+.ms-column {
+  border: none;
+  border-right: 1px solid lightgray;
+}
+
+.ms-column:active,
+.ms-column:focus {
+  outline: none;
+  background-color: white;
+  border: none;
+}
+
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+
+  40% {
+    transform: translateY(-30px);
+  }
+
+  60% {
+    transform: translateY(-15px);
+  }
+}
+
+.animated-magnifying-glass {
+  animation: bounce 2s infinite;
+  color: #ccc;
+}
+
+input:focus::placeholder {
+  color: transparent;
+}
+
+.btn-primary,
+.btn-primary:focus,
+.btn-primary:hover {
+  background-color: #FE5D26;
+  border-color: #FE5D26;
+}
+
+.form-label {
+  margin-bottom: 5px;
+}
+
+.form-control {
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.card.card-body {
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 </style>
