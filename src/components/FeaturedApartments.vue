@@ -103,16 +103,13 @@
 			</div>
 			<div v-if="screenSize === 'large'" class="container">
 				<div class="row">
-					<div class="col-4 py-5" v-for="featured in this.paginatedFeatured">
+					<div class="col-4 py-5" v-for="featured in paginatedFeatured" :key="featured.id">
 						<div class="card">
-							<img :src="`${imgBaseUrl}/${featured.img_path}`"
-								class="card-img-top" alt="" />
+							<img :src="`${imgBaseUrl}/${featured.img_path}`" class="card-img-top fixed-image" alt="Apartment Image" />
 							<div class="card-body">
 								<h5 class="card-title">{{ featured.title }}</h5>
 								<p class="card-text">{{ featured.apartment_description }}</p>
-		
-								<router-link :to="{ name: 'single-result', params: { slug: featured.slug } }"
-									class="btn btn-primary ms_btn">Scopri di più</router-link>
+								<router-link :to="{ name: 'single-result', params: { slug: featured.slug } }" class="btn btn-primary ms_btn">Scopri di più</router-link>
 							</div>
 						</div>
 					</div>
@@ -121,15 +118,13 @@
 		
 			<div v-if="screenSize === 'small'" class="container">
 				<div class="row">
-					<div class="col-12 py-5" v-for="featured in this.allFeatured">
+					<div class="col-12 py-5" v-for="featured in allFeatured" :key="featured.id">
 						<div class="card">
-							<img :src="`${imgBaseUrl}/${featured.img_path}`"
-								class="card-img-top" alt="" />
+							<img :src="`${imgBaseUrl}/${featured.img_path}`" class="card-img-top fixed-image" alt="Apartment Image" />
 							<div class="card-body">
 								<h5 class="card-title">{{ featured.title }}</h5>
 								<p class="card-text">{{ featured.apartment_description }}</p>
-								<router-link :to="{ name: 'single-result', params: { slug: featured.slug } }"
-									class="btn btn-primary ms_btn">Scopri di più</router-link>
+								<router-link :to="{ name: 'single-result', params: { slug: featured.slug } }" class="btn btn-primary ms_btn">Scopri di più</router-link>
 							</div>
 						</div>
 					</div>
@@ -137,7 +132,6 @@
 			</div>
 		</div>
 	</div>
-
 </template>
 
 <style scoped lang="scss">
@@ -145,6 +139,14 @@
 
 	.card {
 		height: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	.fixed-image {
+		height: 200px;
+		object-fit: cover;
 	}
 
 	.ms_btn {
