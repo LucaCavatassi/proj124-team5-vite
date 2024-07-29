@@ -17,7 +17,7 @@
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <router-link :to="{ name: 'login' }" class="nav-link">
-                            Login
+                            Gestione Appartamenti
                         </router-link>
                     </li>
                 </ul>
