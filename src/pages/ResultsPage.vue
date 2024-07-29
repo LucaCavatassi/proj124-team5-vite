@@ -135,9 +135,9 @@ export default {
 </script>
 
 <template>
-  <div class="container mb-5 d-flex flex-column min-vh-100">
+  <div class="container mb-5 d-flex flex-column min-vh-100 text-center mt-3">
     <div v-if="isLoading">
-      <div class="spinner-border text-primary" role="status">
+      <div class="spinner-border ms-spinner" role="status">
         <span class="visually-hidden">Loading...</span>
       </div>
     </div>
@@ -275,6 +275,10 @@ export default {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
+
+.ms-spinner {
+  color:#FE5D26;
 }
 
 .results-title {
