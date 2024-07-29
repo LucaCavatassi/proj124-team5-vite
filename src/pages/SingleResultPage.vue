@@ -72,6 +72,8 @@
 						alt="Default Image" v-else />
 					<h3>Descrizione:</h3>
 					<p>{{ apartment.apartment_description }}</p>
+					<h4>Indirizzo</h4>
+					<p>{{ apartment.address }}</p>
 					<div class="row mt-4">
 						<div class="col-sm-12 col-md-6 col-lg-6">
 							<h5>Caratteristiche</h5>
