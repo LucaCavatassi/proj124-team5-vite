@@ -91,7 +91,7 @@ export default {
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="name" class="form-label">Nome <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" :class="{ 'is-invalid': errors.name }" id="name" v-model="form.name" placeholder="Inserisci il tuo nome" />
+                                <input type="text" autocomplete="off" class="form-control" :class="{ 'is-invalid': errors.name }" id="name" v-model="form.name" placeholder="Inserisci il tuo nome" />
                                 <div class="invalid-feedback" v-if="errors.name">
                                     {{ errors.name[0] }}
                                 </div>
@@ -100,7 +100,7 @@ export default {
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="mail" class="form-label">Mail <span class="text-danger">*</span></label>
-                                <input type="email" class="form-control" :class="{ 'is-invalid': errors.mail }" id="mail" v-model="form.mail" placeholder="Inserisci la tua mail" />
+                                <input type="email" autocomplete="off" class="form-control" :class="{ 'is-invalid': errors.mail }" id="mail" v-model="form.mail" placeholder="Inserisci la tua mail" />
                                 <div class="invalid-feedback" v-if="errors.mail">
                                     {{ errors.mail[0] }}
                                 </div>
@@ -109,7 +109,7 @@ export default {
                     </div>
                     <div class="mb-3">
                         <label for="message" class="form-label">Messaggio <span class="text-danger">*</span></label>
-                        <textarea class="form-control" :class="{ 'is-invalid': errors.message }" id="message" v-model="form.message" placeholder="Ciao, mi interessa il tuo appartamento.." maxlength="500"></textarea>
+                        <textarea class="form-control" autocomplete="off" :class="{ 'is-invalid': errors.message }" id="message" v-model="form.message" placeholder="Ciao, mi interessa il tuo appartamento.." maxlength="500"></textarea>
                         <div class="invalid-feedback" v-if="errors.message">
                             {{ errors.message[0] }}
                         </div>
