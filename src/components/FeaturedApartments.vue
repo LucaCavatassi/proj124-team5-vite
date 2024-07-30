@@ -118,7 +118,7 @@
 		
 			<div v-if="screenSize === 'small'" class="container">
 				<div class="row">
-					<div class="col-12 py-5" v-for="featured in allFeatured" :key="featured.id">
+					<div class="col-12" id="column" v-for="featured in allFeatured" :key="featured.id">
 						<div class="card">
 							<img :src="`${imgBaseUrl}/${featured.img_path}`" class="card-img-top fixed-image" alt="Apartment Image" />
 							<div class="card-body">
@@ -157,6 +157,13 @@
 	.ms_btn:hover {
 		background-color: #fb7a4f;
 		color: $white;
+	}
+
+	@media screen and (max-width: 480px) {
+		#column {
+			padding-top: 10px;
+			padding-bottom: 10px;
+		}
 	}
 
 </style>
