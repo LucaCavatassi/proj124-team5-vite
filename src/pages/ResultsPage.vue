@@ -278,7 +278,7 @@ export default {
 }
 
 .ms-spinner {
-  color:#FE5D26;
+  color: #FE5D26;
 }
 
 .results-title {
@@ -469,5 +469,16 @@ input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+/* Media query for responsive text size */
+@media (max-width: 768px) {
+  .results-title {
+    font-size: 1.8rem; 
+  }
+
+  .no-results h3 {
+    font-size: 2rem; 
+  }
 }
 </style>
