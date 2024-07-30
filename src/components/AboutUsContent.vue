@@ -25,9 +25,9 @@ export default {
       <div class="content-left2">
         <h2>Etica Aziendale</h2>
         <ul>
-          <li><span class="highlight green">TRASPARENZA:</span> Fiducia, base di ogni relazione duratura e fruttifera, si costruisce con l'onestà degli intenti e la chiarezza della forma.</li>
-          <li><span class="highlight orange">RESPONSABILITÀ:</span> sentiamo un forte senso di responsabilità verso l'ambiente e le comunità entro cui operiamo, e ci impegniamo attivamente nell'obiettivo di creare un futuro migliore. <a href="https://www.youtube.com/watch?v=d_mo1D7joI4&ab_channel=NinoPansera" target="_blank">Scopri di più</a></li>
-          <li><span class="highlight yellow">SVILUPPO:</span> il progresso individuale e quello collettivo procedono di paripasso. Promuoviamo un ambiente lavorativo dinamico, consci che si cresce solo a partire da un armonioso e sinergico lavoro di squadra.</li>
+          <li><span class="highlight">TRASPARENZA:</span> Fiducia, base di ogni relazione duratura e fruttifera, si costruisce con l'onestà degli intenti e la chiarezza della forma.</li>
+          <li><span class="highlight">RESPONSABILITÀ:</span> sentiamo un forte senso di responsabilità verso l'ambiente e le comunità entro cui operiamo, e ci impegniamo attivamente nell'obiettivo di creare un futuro migliore. <a href="https://www.youtube.com/watch?v=d_mo1D7joI4&ab_channel=NinoPansera" target="_blank">Scopri di più</a></li>
+          <li><span class="highlight">SVILUPPO:</span> il progresso individuale e quello collettivo procedono di paripasso. Promuoviamo un ambiente lavorativo dinamico, consci che si cresce solo a partire da un armonioso e sinergico lavoro di squadra.</li>
         </ul>
       </div>
     </section>
@@ -138,23 +138,8 @@ ul li {
   font-family: 'Roboto', sans-serif;
   padding: 2px 4px;
   border-radius: 3px;
-}
-
-.highlight.green {
   color: #fff;
-  background-color: #7EBC89;
-  font-size: 1.2em;
-}
-
-.highlight.orange {
-  color: #fff;
-  background-color: #FE5D26;
-  font-size: 1.2em;
-}
-
-.highlight.yellow {
-  color: #333;
-  background-color: #F3DE2C;
+  background-color: rgba(0, 0, 0, 0.4); /* Questo renderà lo sfondo semi-trasparente */
   font-size: 1.2em;
 }
 
@@ -225,5 +210,4 @@ ul li {
     padding: 5px;
   }
 }
-
 </style>
