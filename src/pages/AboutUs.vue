@@ -28,7 +28,7 @@ export default {
   <style scoped>
   .about-us {
     font-family: 'Merriweather', serif; 
-    background-color: #7EBC89; 
+    background-color: white; 
   }
   
   .btn-primary {
