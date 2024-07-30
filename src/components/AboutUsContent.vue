@@ -7,18 +7,21 @@ export default {
 <template>
   <div>
     <section class="section-hero" id="section1">
-      <div class="content-left">
+      <div class="overlay"></div>
+      <div class="content-right">
         <h2>Start Up</h2>
         <p>Un team di giovani intraprendenti e appassionati che s'impegnano ad offrire il meglio. Siamo l'innovazione: analizziamo le tendenze emergenti e ci adattiamo alle nuove sfide, dando via a soluzioni lungimiranti..che anticipano le necessità del mercato..</p>
       </div>
     </section>
     <section class="section-content" id="section2">
+      <div class="overlay"></div>
       <div class="content-left">
         <h2>Mission</h2>
         <p>Puntiamo in alto e lo facciamo offrendo un servizio impeccabile, preciso e costruito a partire dalle esigenze delle persone. La nostra missione è l'eccellenza. Ci lasciamo guidare da un profondo rispetto per l'etica professionale e una devozione alla causa. Ogni progetto è un'opportunità per dimostrare il nostro impegno e la nostra presenza.</p>
       </div>
     </section>
     <section class="section-content" id="section3">
+      <div class="overlay"></div>
       <div class="content-left2">
         <h2>Etica Aziendale</h2>
         <ul>
@@ -32,8 +35,6 @@ export default {
 </template>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
-
 .section-hero, .section-content {
   position: relative;
   background-size: cover;
@@ -43,6 +44,16 @@ export default {
   justify-content: center;
   align-items: center;
   padding: 60px 20px;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); 
+  z-index: 1;
 }
 
 .section-hero {
@@ -68,9 +79,7 @@ export default {
 
 .content-left, .content-right {
   max-width: 50%;
-  background: rgba(215, 226, 212, 0.3); 
-  padding: 6px; 
-  border-radius: 5px; 
+  z-index: 2;
 }
 
 .content-left {
@@ -86,17 +95,13 @@ export default {
 .content-left1 {
   text-align: left;
   max-width: 30%;
-  background: rgba(157, 168, 155, 0.3); 
-  padding: 6px; 
-  border-radius: 5px; 
+  z-index: 2;
 }
 
 .content-left2 {
   text-align: left;
   max-width: 100%;
-  background: rgba(142, 168, 137, 0.3); 
-  padding: 6px; 
-  border-radius: 5px; 
+  z-index: 2;
 }
 
 h1, h2 {
@@ -105,13 +110,13 @@ h1, h2 {
 }
 
 h2 {
-  color: #333; 
+  color: #fff; 
 }
 
 p, ul {
   font-size: 0.9em;
   line-height: 1.6;
-  color: #333; 
+  color: #fff; 
   font-weight: bold;
 }
 
@@ -167,4 +172,58 @@ ul li {
   margin-bottom: 20px;
   padding: 10px;
 }
+
+/* Media Queries for responsiveness */
+@media (max-width: 1024px) {
+  .section-hero, .section-content {
+    padding: 40px 20px;
+  }
+  .content-left, .content-right {
+    max-width: 70%;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-hero, .section-content {
+    padding: 20px 10px;
+  }
+  .content-left, .content-right {
+    max-width: 100%;
+    text-align: center;
+  }
+  h2 {
+    font-size: 1.5em;
+  }
+  p, ul {
+    font-size: 0.8em;
+  }
+  ul li {
+    background-size: 0.8em;
+    padding-left: 1.2em;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-hero {
+    height: 50vh;
+  }
+  .section-content {
+    height: auto;
+    padding: 20px 10px;
+  }
+  h2 {
+    font-size: 1.2em;
+  }
+  p, ul {
+    font-size: 0.7em;
+  }
+  .highlight {
+    font-size: 1em;
+  }
+  #section3 ul li {
+    flex: 0 0 100%;
+    padding: 5px;
+  }
+}
+
 </style>
