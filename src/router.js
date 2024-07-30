@@ -6,6 +6,8 @@ import ResultsPage from "./pages/ResultsPage.vue";
 import SearchPage from "./pages/SearchPage.vue";
 import SingleResultPage from "./pages/SingleResultPage.vue";
 import NotFound from "./components/NotFound.vue";
+import AboutUs from "./pages/AboutUs.vue";
+
 
 const router = createRouter({
 	history: createWebHistory(),
@@ -50,6 +52,11 @@ const router = createRouter({
 			path: "/:notFound",
 			name: "notFound",
 			component: NotFound
+		},
+		{
+			path: "/about",
+			name: "about",
+			component: AboutUs,
 		}
 	],
 });

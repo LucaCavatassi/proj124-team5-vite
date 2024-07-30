@@ -16,6 +16,11 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
+                        <router-link :to="{ name: 'about' }" class="nav-link">
+                            Chi Siamo
+                        </router-link>
+                    </li>
+                    <li class="nav-item">
                         <router-link :to="{ name: 'login' }" class="nav-link">
                             Gestione Appartamenti
                         </router-link>
