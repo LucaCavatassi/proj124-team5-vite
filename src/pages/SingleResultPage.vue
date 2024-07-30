@@ -63,11 +63,12 @@
 						</button>
 					</div>
 					<h1 class="fw-bold">{{ apartment.title }}</h1>
-					<p>{{ apartment.address }}</p>
+					<p><i class="fa-solid fa-location-dot fs-5 me-1" style="color: #FE5D26"></i>{{ apartment.address }}</p>
 					<img :src="`${imgBaseUrl}/${apartment.img_path}`" class="img-fluid rounded mb-4" alt="Apartment Image" v-if="apartment.img_path" />
 					<img class="img-fluid rounded mb-4" src="https://t3.ftcdn.net/jpg/05/52/37/18/360_F_552371867_LkVmqMEChRhMMHDQ2drOS8cwhAWehgVc.png" alt="Default Image" v-else />
 					<h3>Descrizione:</h3>
 					<p>{{ apartment.apartment_description }}</p>
+					
 					<div class="row mt-4">
 						<div class="col-sm-12 col-md-6 col-lg-6">
 							<h5>Caratteristiche</h5>
