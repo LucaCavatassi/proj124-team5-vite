@@ -480,5 +480,8 @@ input[type="number"]::-webkit-outer-spin-button {
   .no-results h3 {
     font-size: 2rem; 
   }
+  .row.g-4 {
+    gap: 0,3rem; 
+  }
 }
 </style>
