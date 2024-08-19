@@ -1,5 +1,3 @@
-# Vue 3 + Vite
+# Description
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
-
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+This project is the final project of a 6 month course made with Boolean, the goal was the resamble an AirBnB/Booking like website, this is the front-end made with Vue, in the landing page you have featured apartemnts wiich are sponsored apartment, a user can sponsor his aprtment on the dashboard of the backend, you can search a location where to search, it autocompletes using the TOMTOM API, then you will be redirected to the results page where you can also filter by a couple of fields the search. 
